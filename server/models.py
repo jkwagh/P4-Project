@@ -13,12 +13,14 @@ class Customer(db.Model, SerializerMixin):
     email = db.Column(db.String(80))
     phone = db.Column(db.String(80))
     address = db.Column(db.String(80))
-    password = db.Column(db.String(80))
+    password = db.Column(db.String(80), nullable = False)
 
-    def __repr__(self, name, email, phone):
+    def __repr__(self, name, email, phone, address, password):
         self.name = name
         self.email = email
         self.phone = phone
+        self.address = address
+        self.password = password
 
 class Food(db.Model, SerializerMixin):
     __tablename__ = 'food'
