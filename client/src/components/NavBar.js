@@ -1,5 +1,7 @@
 import {NavLink} from 'react-router-dom';
 import  './NavBar.css';
+import Login from './Login';
+import Signup from './Signup';
 
 
 const NavBar = () => {
@@ -9,7 +11,8 @@ const NavBar = () => {
              <NavLink to="/">Home</NavLink>
              <NavLink to="/Order">Order</NavLink>
              <NavLink to="/Cart">Cart</NavLink>
-             
+             <NavLink to="/Login" className={Login}>Login</NavLink>
+             <NavLink to="/Signup" className={Signup}>Signup</NavLink>
         </nav>
     );
 }
