@@ -44,7 +44,7 @@ const Signup = () => {
             </label>
             <br />
             <button type="submit">
-                Login
+                Submit
             </button>
             </form>
         </div>
