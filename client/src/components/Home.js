@@ -15,7 +15,7 @@ const Home = (props) => {
 
   return (
     <div className="mainContainer">
-      <NavBar />
+      
       <div className={"titleContainer"}>
         <div>Welcome!</div>
       </div>

@@ -15,7 +15,6 @@ function App() {
 
   return (
     <div classname='App'>
-      <NavBar />
       <Home />
       <Login element={<Login loggedIn={loggedIn}/>}/>
       <Signup />

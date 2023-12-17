@@ -9,7 +9,7 @@ from flask_restful import Api, Resource
 # Local imports
 from config import app, db, api
 # Add your model imports
-from models import Customer, Food, Restaurant
+from models import Customer, Food, Restaurant, RestaurantFood
 
 
 # Views go here!
@@ -41,12 +41,19 @@ api.add_resource(AllCustomers, '/customers')
 
 class AllRestaurants(Resource):
     def get(self):
-        response_body = [restaurant.to_dict() for restaurant in Restaurant.query.all()]
+        response_body = [restaurants.to_dict() for restaurants in Restaurant.query.all()]
         return make_response(response_body, 200)
     
 api.add_resource(AllRestaurants, '/restaurants')
 
+class AllRestaurantsFood(Resource):
 
+    def get(self):
+        response_body = [restaurantFood.to_dict() for restaurantFood in RestaurantFood.query.all()]
+        return make_response(response_body, 200)
+    
+
+api.add_resource(AllRestaurantsFood, '/restaurantFood')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

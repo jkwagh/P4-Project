@@ -27,15 +27,34 @@ class Food(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     price = db.Column(db.Integer)
+    type = db.Column(db.String(80))
 
-    def __repr__(self, name, price):
+    restaurant_food = db.relationship('RestaurantFood', back_populates='food')
+
+    def __repr__(self, name, price, type):
         self.name = name
         self.price = price
-
+        self.type = type
 class Restaurant(db.Model, SerializerMixin):
     __tablename__ = 'restaurants'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
 
+    restaurant_food = db.relationship('RestaurantFood', back_populates='restaurants')
+
     def __repr__(self, name):
         self.name = name
+class RestaurantFood(db.Model, SerializerMixin):
+    __tablename__ = 'restaurant_food'
+    id = db.Column(db.Integer, primary_key=True)
+    price=db.Column(db.Integer, nullable = False)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants.id'))
+    food_id = db.Column(db.Integer, db.ForeignKey('food.id'))
+
+    restaurants=db.relationship('Restaurant', back_populates='restaurant_food')
+    food = db.relationship('Food', back_populates='restaurant_food')
+   
+   
+    def __repr__(self, restaurant_id, food_id):
+        self.restaurant_id = restaurant_id
+        self.food_id = food_id
