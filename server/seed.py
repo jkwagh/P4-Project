@@ -21,7 +21,7 @@ with app.app_context():
         
 
         customer = Customer(
-            name=fake.name(),
+            username=fake.name(),
             email=fake.email(),
             phone=fake.phone_number(),
             address=fake.address(),

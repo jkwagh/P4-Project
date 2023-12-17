@@ -9,7 +9,7 @@ from config import db
 class Customer(db.Model, SerializerMixin):
     __tablename__ = 'customers'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80))
+    username = db.Column(db.String(80))
     email = db.Column(db.String(80))
     phone = db.Column(db.String(80))
     address = db.Column(db.String(80))

@@ -3,8 +3,8 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request
-from flask_restful import Resource
+from flask import request, make_response
+from flask_restful import Api, Resource
 
 # Local imports
 from config import app, db, api
@@ -17,6 +17,35 @@ from models import Customer, Food, Restaurant
 @app.route('/')
 def index():
     return '<h1>Project Server</h1>'
+
+api = Api(app)
+
+class AllCustomers(Resource):
+    def get(self):
+        response_body = [customer.to_dict() for customer in Customer.query.all()]
+        return make_response(response_body, 200)
+    
+    def post(self):
+        try:
+            new_customer = Customer(username=request.json['name'], email=request.json['email'], phone=request.json['phone'], address=request.json['address'], password=request.json['password'])
+            db.session.add(new_customer)
+            db.session.commit()
+            return make_response(new_customer.to_dict(), 201)
+        except:
+            response_body = {
+                "error" : "Customer could not be created"
+            }
+            return make_response(response_body, 400)
+    
+api.add_resource(AllCustomers, '/customers')
+
+class AllRestaurants(Resource):
+    def get(self):
+        response_body = [restaurant.to_dict() for restaurant in Restaurant.query.all()]
+        return make_response(response_body, 200)
+    
+api.add_resource(AllRestaurants, '/restaurants')
+
 
 
 if __name__ == '__main__':
