@@ -3,20 +3,20 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request, make_response
+from flask import request, make_response, session, Flask
 from flask_restful import Api, Resource
 
 # Local imports
-from config import app, db, api
+from config import app, db, api, migrate
 # Add your model imports
 from models import Customer, Food, Restaurant, RestaurantFood
-
 
 # Views go here!
 
 @app.route('/')
 def index():
     return '<h1>Project Server</h1>'
+
 
 api = Api(app)
 
@@ -60,9 +60,30 @@ class AllRestaurantFoods(Resource):
     
 api.add_resource(AllRestaurantFoods, '/restaurant_foods')
 
-
+class Login(Resource):
     
-
+    def get(self):
+        pass
+    
+    def post(self):
+        user = Customer.query.filter(
+            Customer.username == request.get_json()['username']
+        ).first()
+        
+        session['customer_id'] = user.id
+        return user.to_dict()
+    
+api.add_resource(Login, '/login')
+    
+class CheckSession(Resource):
+    def get(self):
+        user = Customer.query.filter(Customer.id == session.get('customer_id')).first()
+        if user:
+            return user.to_dict()
+        else:
+            return {'message': '401: Not Authorized'}, 401
+        
+api.add_resource(CheckSession, '/check_session')
 
 
 if __name__ == '__main__':
