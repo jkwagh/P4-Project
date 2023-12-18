@@ -128,8 +128,8 @@ with app.app_context():
 
 
     pr1 = RestaurantFood(restaurants=jamaican, food=curryChicken, price= 10.99)
-    pr1 = RestaurantFood(restaurants=jamaican, food=jerkChicken, price= 10.99)
-
+    pr2 = RestaurantFood(restaurants=jamaican, food=jerkChicken, price= 10.99)
+    pr3 = RestaurantFood(restaurants=jamaican, food=oxtails, price= 10.99)
     restaurantFood = [pr1]
 
     db.session.add_all(restaurants)

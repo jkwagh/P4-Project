@@ -15,12 +15,10 @@ class Customer(db.Model, SerializerMixin):
     address = db.Column(db.String(80))
     password = db.Column(db.String(80), nullable = False)
 
-    def __repr__(self, name, email, phone, address, password):
-        self.name = name
-        self.email = email
-        self.phone = phone
-        self.address = address
-        self.password = password
+    def __repr__(self):
+        return f"<Customer {self.id}: {self.username}: {self.email}: {self.phone}: {self.address}>"
+
+
 
 class Food(db.Model, SerializerMixin):
     __tablename__ = 'food'
@@ -32,9 +30,7 @@ class Food(db.Model, SerializerMixin):
     restaurant_food = db.relationship('RestaurantFood', back_populates='food')
 
     def __repr__(self, name, price, type):
-        self.name = name
-        self.price = price
-        self.type = type
+       return f"<Food {self.id}: {self.name}: {self.price}: {self.type}>"
 class Restaurant(db.Model, SerializerMixin):
     __tablename__ = 'restaurants'
     id = db.Column(db.Integer, primary_key=True)
@@ -43,7 +39,7 @@ class Restaurant(db.Model, SerializerMixin):
     restaurant_food = db.relationship('RestaurantFood', back_populates='restaurants')
 
     def __repr__(self, name):
-        self.name = name
+        return f"<Restaurant {self.id}: {self.name}>"
 class RestaurantFood(db.Model, SerializerMixin):
     __tablename__ = 'restaurant_food'
     id = db.Column(db.Integer, primary_key=True)
@@ -56,5 +52,4 @@ class RestaurantFood(db.Model, SerializerMixin):
    
    
     def __repr__(self, restaurant_id, food_id):
-        self.restaurant_id = restaurant_id
-        self.food_id = food_id
+        return f"<RestaurantFood {self.id}: {self.price}: {self.restaurant_id}: {self.food_id}>"
