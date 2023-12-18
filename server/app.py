@@ -27,7 +27,7 @@ class AllCustomers(Resource):
     
     def post(self):
         try:
-            new_customer = Customer(username=request.json['name'], email=request.json['email'], phone=request.json['phone'], address=request.json['address'], password=request.json['password'])
+            new_customer = Customer(username=request.json['username'], email=request.json['email'], phone=request.json['phone'], address=request.json['address'], password=request.json['password'])
             db.session.add(new_customer)
             db.session.commit()
             return make_response(new_customer.to_dict(), 201)

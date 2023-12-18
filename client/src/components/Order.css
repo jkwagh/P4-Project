@@ -10,7 +10,7 @@
     color:black;
     max-width: calc(100vw -2rem);
     grid-template-columns: 1fr 1fr 1fr;
-    
+    justify-content: center;
 
  }
   
