@@ -1,6 +1,7 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy import MetaData
+from sqlalchemy.orm import validates
 
 from config import db
 
@@ -15,6 +16,13 @@ class Customer(db.Model, SerializerMixin):
     address = db.Column(db.String(80))
     password = db.Column(db.String(80), nullable = False)
 
+
+    @validates('phone')
+    def validate_phone(self, attr, value):
+        if len(value) < 10:
+            raise ValueError('Invalid phone number')
+        else:
+            return value
     def __repr__(self):
         return f"<Customer {self.id}: {self.username}: {self.email}: {self.phone}: {self.address}>"
 
@@ -24,13 +32,12 @@ class Food(db.Model, SerializerMixin):
     __tablename__ = 'food'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    price = db.Column(db.Integer)
     type = db.Column(db.String(80))
 
     restaurant_food = db.relationship('RestaurantFood', back_populates='food')
 
-    def __repr__(self, name, price, type):
-       return f"<Food {self.id}: {self.name}: {self.price}: {self.type}>"
+    def __repr__(self):
+       return f"<Food {self.id}:{self.name}:{self.type}>"
 class Restaurant(db.Model, SerializerMixin):
     __tablename__ = 'restaurants'
     id = db.Column(db.Integer, primary_key=True)
@@ -38,7 +45,7 @@ class Restaurant(db.Model, SerializerMixin):
 
     restaurant_food = db.relationship('RestaurantFood', back_populates='restaurants')
 
-    def __repr__(self, name):
+    def __repr__(self):
         return f"<Restaurant {self.id}: {self.name}>"
 class RestaurantFood(db.Model, SerializerMixin):
     __tablename__ = 'restaurant_food'
@@ -51,5 +58,5 @@ class RestaurantFood(db.Model, SerializerMixin):
     food = db.relationship('Food', back_populates='restaurant_food')
    
    
-    def __repr__(self, restaurant_id, food_id):
-        return f"<RestaurantFood {self.id}: {self.price}: {self.restaurant_id}: {self.food_id}>"
+    def __repr__(self):
+        return f"<RestaurantFood {self.id}:{self.price}:{self.restaurant_id}:{self.food_id}>"

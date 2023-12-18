@@ -41,19 +41,29 @@ api.add_resource(AllCustomers, '/customers')
 
 class AllRestaurants(Resource):
     def get(self):
-        response_body = [restaurants.to_dict() for restaurants in Restaurant.query.all()]
+        response_body = [restaurants.to_dict(rules = ['-restaurant_food']) for restaurants in Restaurant.query.all()]
         return make_response(response_body, 200)
     
 api.add_resource(AllRestaurants, '/restaurants')
 
-class AllRestaurantsFood(Resource):
-
+class AllFoods(Resource):
     def get(self):
-        response_body = [restaurantFood.to_dict() for restaurantFood in RestaurantFood.query.all()]
+        response_body = [food.to_dict(rules = ['-restaurant_food']) for food in Food.query.all()]
         return make_response(response_body, 200)
     
+api.add_resource(AllFoods, '/foods')
 
-api.add_resource(AllRestaurantsFood, '/restaurantFood')
+class AllRestaurantFoods(Resource):
+    def get(self):
+        response_body = [restaurant_food.to_dict(rules = ['-restaurants.restaurant_food','-food.restaurant_food']) for restaurant_food in RestaurantFood.query.all()]
+        return make_response(response_body, 200)
+    
+api.add_resource(AllRestaurantFoods, '/restaurant_foods')
+
+
+    
+
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
