@@ -33,30 +33,33 @@ class Food(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     type = db.Column(db.String(80))
+    img = db.Column(db.String(80))
+    restaurant_name = db.Column(db.String(80))
+    price = db.Column(db.Integer)
 
-    restaurant_food = db.relationship('RestaurantFood', back_populates='food')
+    # restaurant_food = db.relationship('RestaurantFood', back_populates='food')
 
     def __repr__(self):
-       return f"<Food {self.id}:{self.name}:{self.type}>"
+       return f"<Food {self.id}:{self.name}:{self.type}:{self.img}:{self.restaurant_name}:{self.price}>"
 class Restaurant(db.Model, SerializerMixin):
     __tablename__ = 'restaurants'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
 
-    restaurant_food = db.relationship('RestaurantFood', back_populates='restaurants')
+    # restaurant_food = db.relationship('RestaurantFood', back_populates='restaurants')
 
     def __repr__(self):
         return f"<Restaurant {self.id}: {self.name}>"
-class RestaurantFood(db.Model, SerializerMixin):
-    __tablename__ = 'restaurant_food'
-    id = db.Column(db.Integer, primary_key=True)
-    price=db.Column(db.Integer, nullable = False)
-    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants.id'))
-    food_id = db.Column(db.Integer, db.ForeignKey('food.id'))
+# class RestaurantFood(db.Model, SerializerMixin):
+#     __tablename__ = 'restaurant_food'
+#     id = db.Column(db.Integer, primary_key=True)
+#     price=db.Column(db.Integer, nullable = False)
+#     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants.id'))
+#     food_id = db.Column(db.Integer, db.ForeignKey('food.id'))
 
-    restaurants=db.relationship('Restaurant', back_populates='restaurant_food')
-    food = db.relationship('Food', back_populates='restaurant_food')
+#     restaurants=db.relationship('Restaurant', back_populates='restaurant_food')
+#     food = db.relationship('Food', back_populates='restaurant_food')
    
    
-    def __repr__(self):
-        return f"<RestaurantFood {self.id}:{self.price}:{self.restaurant_id}:{self.food_id}>"
+#     def __repr__(self):
+#         return f"<RestaurantFood {self.id}:{self.price}:{self.restaurant_id}:{self.food_id}>"
