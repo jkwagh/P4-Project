@@ -26,11 +26,23 @@ function App() {
     console.log(user)
   }
 
+  // const newCustomer = (customer) => {
+  //   fetch('/customers', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify()
+  //   })
+  //   .then((resp) => resp.json())
+  //   .then((data) => console.log(data, user))
+  // }
+
   return (
     <div classname='App'>
       <Home />
       <Login loggedIn={loggedIn} onLogin={handleLogin}/>
-      <Signup />
+      <Signup newCustomer={newCustomer}/>
       <Admin />
     </div>
   )

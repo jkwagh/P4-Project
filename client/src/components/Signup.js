@@ -1,21 +1,34 @@
 import React, { useState } from "react"
 import NavBar from "./NavBar"
 
-const Signup = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [address, setAddress] = useState('');
-    const [phone, setPhone] = useState('');
+const Signup = ({ newCustomer }) => {
+    const [formData, setFormData] = useState({
+        username: '',
+        email: '',
+        phone: '',
+        address: '',
+        password: '', 
+    });
+    const [user, setUser] = useState([])
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value})
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        const newCustomer = {
-            username,
-            password,
-            address,
-            phone,
-        };
+        console.log(formData)
+       // newCustomer(user)
+       fetch('/customers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify()
+      })
+      .then((resp) => resp.json())
+      .then((data) => setUser([...user, data]))
       };
 
     return ( 
@@ -25,22 +38,27 @@ const Signup = () => {
             <form onSubmit={handleSubmit}>
             <label>
                 Username:
-                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <input type="text" name="username" value={formData.username} onChange={handleInputChange} />
             </label>
             <br />
             <label>
                 Password:
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input type="text" name="password" value={formData.password} onChange={handleInputChange} />
             </label>
             <br />
             <label>
                 Address:
-                <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
+                <input type="text" name="address" value={formData.address} onChange={handleInputChange} />
             </label>
             <br />
             <label>
                 Phone:
-                <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                <input type="text" name="phone" value={formData.phone} onChange={handleInputChange} />
+            </label>
+            <br />
+            <label>
+                E-mail:
+                <input type="text" name="email" value={formData.email} onChange={handleInputChange} />
             </label>
             <br />
             <button type="submit">
