@@ -5,10 +5,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "./Home";
 import Login from "./Login";
-import NavBar from "./NavBar";
+
 import Signup from "./Signup";
 import Admin from "./Admin";
 import Order from "./Order";
+import Checkout from "./Checkout";
+import OrderFood from "./OrderFood";
+import OrderHeader from "./OrderHeader"
 
 
 function App() {
@@ -16,6 +19,8 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [user, setUser] = useState(null);
+  const [cart, addToCart] = useState([])
+
 
   // useEffect(() => {
   //   fetch("/check_session")
@@ -60,15 +65,26 @@ function App() {
       },
       {
         path: "/order",
-        element: <Order />,
+        element: <>
+        <Order />
+        <OrderHeader />
+        <OrderFood cart={cart} addToCart={addToCart}/>
+        </>, 
       },
+      {
+        path: "/checkout",
+        element: <>
+        <Checkout cart={cart} addToCart={addToCart}/>
+        
+        </>
+      }
     ]
 
     const router = createBrowserRouter(
       routes
     )
   return (
-    <div classname='App'>
+    <div className='App'>
       <RouterProvider router={router}/>
     </div>
   )

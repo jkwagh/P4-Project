@@ -9,10 +9,10 @@ import NavBar from './NavBar';
 
 
 
-const Checkout = () => {
-    const [cart, addToCart] = useState([]);
+const Checkout = ({cart, addToCart}) => {
     
-
+    
+console.log(addToCart)
     
 
     return (

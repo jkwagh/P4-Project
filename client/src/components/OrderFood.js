@@ -5,10 +5,10 @@ import './Order.css'
 
 
 
-const OrderFood = () => {
+const OrderFood = ({cart, addToCart}) => {
 
     const [foods, setFoods] = useState([]);
-    const [cart, addToCart] = useState([]);
+    
     
     console.log(cart);
 
