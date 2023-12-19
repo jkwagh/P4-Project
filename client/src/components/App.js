@@ -8,10 +8,11 @@ import Admin from "./Admin";
 
 
 function App() {
-
+  const [customers, setCustomers] = useState([])
   const [loggedIn, setLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [user, setUser] = useState(null);
+  const [formData, setFormData] = useState({});
 
   // useEffect(() => {
   //   fetch("/check_session")
@@ -26,25 +27,27 @@ function App() {
     console.log(user)
   }
 
-  // const newCustomer = (customer) => {
-  //   fetch('/customers', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify()
-  //   })
-  //   .then((resp) => resp.json())
-  //   .then((data) => console.log(data, user))
-  // }
+  const addCustomer = (newCustomer) => {
 
+    fetch('/customers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newCustomer)
+    })
+    .then((resp) => resp.json())
+    .then((data) => setCustomers([...customers, data]))
+  }
+
+  
   return (
     <div classname='App'>
       
       <Home />
       
       <Login loggedIn={loggedIn} onLogin={handleLogin}/>
-      {/* <Signup newCustomer={newCustomer}/> */}
+      <Signup addCustomer={addCustomer}/>
       <Admin />
     </div>
   )

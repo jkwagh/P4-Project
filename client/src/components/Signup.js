@@ -1,13 +1,15 @@
 import React, { useState } from "react"
 import NavBar from "./NavBar"
+import App from "./App";
 
-const Signup = ({ newCustomer }) => {
+const Signup = ({ addCustomer, newFormData }) => {
     const [formData, setFormData] = useState({
-        username: '',
-        email: '',
-        phone: '',
-        address: '',
-        password: '', 
+    address: "",
+    email: "",
+    id: '',
+    password: "",
+    phone: "",
+    username: ""
     });
     const [user, setUser] = useState([])
 
@@ -19,16 +21,7 @@ const Signup = ({ newCustomer }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData)
-       // newCustomer(user)
-       fetch('/customers', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify()
-      })
-      .then((resp) => resp.json())
-      .then((data) => setUser([...user, data]))
+        addCustomer(formData)
       };
 
     return ( 
