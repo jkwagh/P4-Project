@@ -19,8 +19,9 @@ const Home = (props) => {
   };
 
   return (
+    
     <div className="mainContainer">
-      
+      <NavBar />
       <div className={"titleContainer"}>
         <div>Welcome!</div>
       </div>
@@ -39,6 +40,7 @@ const Home = (props) => {
           onClick={onSignupClick}
           value="Signup"
         />
+        
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import Login from "./Login";
 import NavBar from "./NavBar";
 import Signup from "./Signup";
 import Admin from "./Admin";
-import Cart from "./Cart";
+
 
 function App() {
 
@@ -40,9 +40,11 @@ function App() {
 
   return (
     <div classname='App'>
+      
       <Home />
+      
       <Login loggedIn={loggedIn} onLogin={handleLogin}/>
-      <Signup newCustomer={newCustomer}/>
+      {/* <Signup newCustomer={newCustomer}/> */}
       <Admin />
     </div>
   )

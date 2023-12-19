@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import './Order.css'
-import './OrderFood.css'
+
 
 
 const OrderFood = ({toshow}) => {
 
     const [foods, setFoods] = useState([]);
     const [cart, addToCart] = useState([]);
+
+    let navigate = useNavigate();
+    const routeChange = () => {
+      let path = `/Checkout`;
+      navigate(path);
+    }
 
     
     useEffect(() => {
@@ -48,7 +55,10 @@ const OrderFood = ({toshow}) => {
               <div className="total">
                 <h1>Total</h1>
                 <p>{cart.reduce((a, b) => a + b.price, 0)}$</p>
-                <button>Check out</button>
+                <button className = "Checkout-btn"
+                  onClick={routeChange}>
+                    Check out
+                    </button>
               </div>
             </div>
           ) : null}
