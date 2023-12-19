@@ -4,16 +4,19 @@ import './Order.css'
 
 
 
-const OrderFood = ({toshow}) => {
+
+const OrderFood = ({cart, addToCart}) => {
 
     const [foods, setFoods] = useState([]);
-    const [cart, addToCart] = useState([]);
+    
+    
+    console.log(cart);
 
     let navigate = useNavigate();
-    const routeChange = () => {
-      let path = `/Checkout`;
-      navigate(path);
-    }
+    // const routeChange = () => {
+    //   let path = `/Checkout`;
+    //   navigate(path);
+    // }
 
     
     useEffect(() => {
@@ -22,46 +25,13 @@ const OrderFood = ({toshow}) => {
         .then((data) => setFoods(data));
     }, []);
     const filteredFoods = foods.filter((foods) => 
-        foods.type.toLowerCase()
+        foods.type
         )
     
     
     return (
         <div>
-            {toshow ? (
-            <div className=" cart-cont">
-              <div className="cart-list">
-                <h1>Cart</h1>
-                {/* cart items */}
-                {cart && cart.map((foods, index) => {
-                  return (
-                    <div
-                      style={{ backgroundImage: `url(${foods.img})` }}
-                      className="cart"
-                      key={index}
-                    >
-                      <h3>{foods.name}</h3>
-                      <p>{foods.price}$</p>
-                      <button onClick={(e)=>{
-                        // remove item from cart
-                        cart.splice(index, 1);
-                        let x = cart;
-                        addToCart([...x]);
-                    }} >Remove Item</button>
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="total">
-                <h1>Total</h1>
-                <p>{cart.reduce((a, b) => a + b.price, 0)}$</p>
-                <button className = "Checkout-btn"
-                  onClick={routeChange}>
-                    Check out
-                    </button>
-              </div>
-            </div>
-          ) : null}
+            
 
                 {/* {cart && cart.map((item, index) => {
                 return (
@@ -89,7 +59,7 @@ const OrderFood = ({toshow}) => {
                 onClick={() => {
                     alert(`${foods.name} added to cart!`);
                 addToCart([...cart, foods]);
-                console.log(cart);
+                
             }}
             >
                 Add to basket

@@ -9,7 +9,7 @@ from flask_restful import Api, Resource
 # Local imports
 from config import app, db, api, migrate
 # Add your model imports
-from models import Customer, Food, Restaurant
+from models import Customer, Food, Restaurant, Order
 
 # Views go here!
 
@@ -41,14 +41,14 @@ api.add_resource(AllCustomers, '/customers')
 
 class AllRestaurants(Resource):
     def get(self):
-        response_body = [restaurants.to_dict(rules = ['-restaurant_food']) for restaurants in Restaurant.query.all()]
+        response_body = [restaurants.to_dict() for restaurants in Restaurant.query.all()]
         return make_response(response_body, 200)
     
 api.add_resource(AllRestaurants, '/restaurants')
 
 class AllFoods(Resource):
     def get(self):
-        response_body = [food.to_dict(rules = ['-restaurant_food']) for food in Food.query.all()]
+        response_body = [food.to_dict(only =('id','name','type','img','restaurant_name','price')) for food in Food.query.all()]
         return make_response(response_body, 200)
     
 api.add_resource(AllFoods, '/foods')
@@ -84,6 +84,25 @@ class CheckSession(Resource):
             return {'message': '401: Not Authorized'}, 401
         
 api.add_resource(CheckSession, '/check_session')
+
+class AllOrders(Resource):
+    def get(self):
+        response_body = [order.to_dict() for order in Order.query.all()]
+        return make_response(response_body, 200)
+    
+    def post(self):
+        try:
+            new_order = Order(customer_id=request.json['customer_id'], food_id=request.json['food_id'], quantity=request.json['quantity'])
+            db.session.add(new_order)
+            db.session.commit()
+            return make_response(new_order.to_dict(), 201)
+        except:
+            response_body = {
+                "error" : "Order could not be created"
+            }
+            return make_response(response_body, 400)
+    
+api.add_resource(AllOrders, '/orders')
 
 
 if __name__ == '__main__':

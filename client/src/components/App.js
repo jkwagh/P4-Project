@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import Home from "./Home";
 import Login from "./Login";
-import NavBar from "./NavBar";
+
 import Signup from "./Signup";
 import Admin from "./Admin";
+import Order from "./Order";
+import Checkout from "./Checkout";
+import OrderFood from "./OrderFood";
+import OrderHeader from "./OrderHeader"
 
 
 function App() {
@@ -12,7 +19,8 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [user, setUser] = useState(null);
-  const [formData, setFormData] = useState({});
+  const [cart, addToCart] = useState([])
+
 
   // useEffect(() => {
   //   fetch("/check_session")
@@ -27,28 +35,57 @@ function App() {
     console.log(user)
   }
 
-  const addCustomer = (newCustomer) => {
-
-    fetch('/customers', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+  // const newCustomer = (customer) => {
+  //   fetch('/customers', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify()
+  //   })
+  //   .then((resp) => resp.json())
+  //   .then((data) => console.log(data, user))
+  // }
+    const routes = [
+      {
+        path: "/",
+        element: <Home />,
       },
-      body: JSON.stringify(newCustomer)
-    })
-    .then((resp) => resp.json())
-    .then((data) => setCustomers([...customers, data]))
-  }
+      {
+        path: "/login",
+        element: <Login loggedIn={loggedIn} onLogin={handleLogin}/>,
+      },
+      {
+        path: "/signup",
+        element: <Signup/>,
+      },
+      {
+        path: "/admin",
+        element: <Admin />,
+      },
+      {
+        path: "/order",
+        element: <>
+        <Order />
+        <OrderHeader />
+        <OrderFood cart={cart} addToCart={addToCart}/>
+        </>, 
+      },
+      {
+        path: "/checkout",
+        element: <>
+        <Checkout cart={cart} addToCart={addToCart}/>
+        
+        </>
+      }
+    ]
 
-  
+    const router = createBrowserRouter(
+      routes
+    )
   return (
-    <div classname='App'>
-      
-      <Home />
-      
-      <Login loggedIn={loggedIn} onLogin={handleLogin}/>
-      <Signup addCustomer={addCustomer}/>
-      <Admin />
+    <div className='App'>
+      <RouterProvider router={router}/>
     </div>
   )
 }
