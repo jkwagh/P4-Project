@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import Home from "./Home";
 import Login from "./Login";
 import NavBar from "./NavBar";
 import Signup from "./Signup";
 import Admin from "./Admin";
+import Order from "./Order";
 
 
 function App() {
@@ -37,15 +41,35 @@ function App() {
   //   .then((resp) => resp.json())
   //   .then((data) => console.log(data, user))
   // }
+    const routes = [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <Login loggedIn={loggedIn} onLogin={handleLogin}/>,
+      },
+      {
+        path: "/signup",
+        element: <Signup/>,
+      },
+      {
+        path: "/admin",
+        element: <Admin />,
+      },
+      {
+        path: "/order",
+        element: <Order />,
+      },
+    ]
 
+    const router = createBrowserRouter(
+      routes
+    )
   return (
     <div classname='App'>
-      
-      <Home />
-      
-      <Login loggedIn={loggedIn} onLogin={handleLogin}/>
-      {/* <Signup newCustomer={newCustomer}/> */}
-      <Admin />
+      <RouterProvider router={router}/>
     </div>
   )
 }

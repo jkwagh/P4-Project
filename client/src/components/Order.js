@@ -5,10 +5,14 @@ import OrderHeader from './OrderHeader';
 import OrderFood from './OrderFood';
 
 
+
+
 const Order = () => {
 
     
     const [show, setShow] = useState(false);
+    const [cart, addToCart] = useState([]);
+    
     const getDta = (a) => {
             setShow(a);
         }
@@ -16,8 +20,9 @@ const Order = () => {
         <div>
             <NavBar />
             
+            
             <OrderHeader showing={getDta} />
-            <OrderFood toshow={show} />
+            <OrderFood toshow={show}/>
         </div>
         
     
