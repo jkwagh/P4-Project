@@ -1,19 +1,23 @@
-.nav-link{
-    display: inline-block;
-    box-sizing: border-box;
-    width: 100px;
-    padding: 5px;
-    margin: 0 6px 6px;
-    background: green;
-    text-decoration: none;
-    text-align: center;
-    font-size: min(10vw, 15px) ;
-    color: white;
+.navBar{
+    background-color: yellow;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    
+}
+.inputButton{
+  top:0;
+  right: 0;
+  position: absolute;
+  
+}
+.inputButton-signup{
+    top:0;
+    right: 100px;
+    position:absolute;
+
 }
 
-.active {
-    color: red;
-}
-.login {
-    font-size: medium;
-}
