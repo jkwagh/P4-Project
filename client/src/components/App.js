@@ -12,6 +12,7 @@ import Order from "./Order";
 import Checkout from "./Checkout";
 import OrderFood from "./OrderFood";
 import OrderHeader from "./OrderHeader"
+import About from "./About";
 
 
 function App() {
@@ -85,6 +86,10 @@ function App() {
         <Checkout cartItems={cartItems} setCartItems= {setCartItems} />
     
         </>
+      },
+      {
+        path: "/about",
+        element: <About/>
       }
     ]
 

@@ -1,0 +1,18 @@
+.mainContainer1 {
+    background-image: url('https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D');
+    height: 100dvh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-top: -20px;
+}
+.nameContainer {
+    color: blue;
+    font-size: x-large;
+    position: absolute;
+    top:50%;
+    left:42%;
+    margin:-50px 0 0 -50px;
+
+
+}

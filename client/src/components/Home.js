@@ -4,6 +4,7 @@ import "./Home.css";
 import NavBar from "./NavBar";
 import Login from "./Login";
 
+
 const Home = (props) => {
   const { loggedIn, email } = props;
   const navigate = useNavigate();
@@ -19,30 +20,27 @@ const Home = (props) => {
   };
 
   return (
-    
-    <div className="mainContainer">
+    <div>
+      
+   <div className="navBar">
       <NavBar />
-      <div className={"titleContainer"}>
-        <div>Welcome!</div>
+   </div>
+    <div className="mainContainer1">
+      
+      <h1>Hello</h1> 
+      <div className="nameContainer">
+      <h1> Flatiron Eats</h1>
+
+
       </div>
-      <div>This is the home page.</div>
-      <div className={"buttonContainer"}>
-        <input
-          className={"inputButton"}
-          type="button"
-          onClick={onLoginClick}
-          value={loggedIn ? "Log out" : "Log in"}
-        />
-        {loggedIn ? <div>Your email address is {email}</div> : <div />}
-        <input
-          className={"inputButton"}
-          type="button"
-          onClick={onSignupClick}
-          value="Signup"
-        />
-        
-      </div>
+
+
+      
+      
     </div>
+
+    </div>
+ 
   );
 };
 
