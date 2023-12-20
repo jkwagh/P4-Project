@@ -43,7 +43,11 @@ const Checkout = ({cartItems, setCartItems}) => {
         <div className="total">
           <h1>Total</h1>
           <p>{cartItems.reduce((a, b) => a + b.price, 0)}$</p>
-          <button className="Checkout-btn">Check out</button>
+          <button className="Checkout-btn"
+          onClick={() => {
+            alert(`Your Order is being processed and will arrive shortly`)
+          }}
+          >Order Now</button>
         </div>
       </div>
     </div>
