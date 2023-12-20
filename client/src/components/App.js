@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "./Home";
@@ -17,9 +15,8 @@ import OrderHeader from "./OrderHeader"
 function App() {
   const [customers, setCustomers] = useState([])
   const [loggedIn, setLoggedIn] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [user, setUser] = useState(null);
-  const [cart, addToCart] = useState([])
+  const [cart, addToCart] = useState([]);
+
 
   useEffect(() => {
     fetch('http://localhost:5555/customers')
@@ -38,12 +35,11 @@ function App() {
   //   })
   // }, []);
 
-  const handleLogin = (user) => {
-    console.log(user)
+  const handleLogin = (e) => {
+    
   }
 
   const addCustomer = (formData) => {
-    console.log(formData)
     fetch('http://localhost:5555/customers', {
       method: 'POST',
       headers: {
@@ -53,7 +49,7 @@ function App() {
     })
     .then((resp) => resp.json())
     .then((data) => setCustomers([...customers, data]))
-  }
+    }
     const routes = [
       {
         path: "/",
@@ -94,6 +90,7 @@ function App() {
   return (
     <div className='App'>
       <RouterProvider router={router}/>
+      {/* <Outlet context={handleLogin} /> */}
     </div>
   )
 }

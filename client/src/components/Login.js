@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import NavBar from "./NavBar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import "./Login.css"
 import App from "./App"
 
@@ -8,22 +8,11 @@ import App from "./App"
 const Login = ({ onLogin }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-   
-    function handleSubmit(e) {
-        
-        e.preventDefault();
+    const login = useOutletContext();
 
-        fetch("/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username }),
-        })
-        .then((resp) => resp.json())
-        .then((user) => {
-            onLogin(user)
-        })
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onLogin()
     }
 
     return <div className="mainContainer">

@@ -17,7 +17,6 @@ const Signup = ({ addCustomer }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        //console.log(formData)
         addCustomer(formData)
       };
 
