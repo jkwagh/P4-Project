@@ -1,5 +1,29 @@
-.cart-list{
-    
-    
-
-}
+.cart-list {
+    height: 80%;
+    width: 90%;
+    overflow-y: scroll;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+ }
+  
+ .cart-cont h1 {
+    text-align: left;
+ }
+  
+ .cart {
+    background-color: rgb(241, 237, 237);
+    height: 25%;
+    max-width: 250px;
+    box-shadow: 0px 2px 8px 0px rgba(39, 10, 141, 0.5), 0px 4px 16px 0px rgba(7, 71, 190, 0.5);
+    text-align: center;
+    border-radius: 20px;
+    margin: 1%;
+    cursor: pointer;
+    margin-bottom: 8px;
+ }
+ .food-cart{
+    grid-template-rows: 1fr 1fr;
+    display: grid
+ }

@@ -33,7 +33,9 @@ const Checkout = ({cartItems, setCartItems}) => {
         <div className="cart-list">
           <h1>Cart</h1>
           {cartItems.map((food, index) => (
-            <div key={index}>
+            <div className="food-cart" key={index}
+            style={{backgroundImage: `url(${food.img})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
+              
               <h3>{food.name}</h3>
               <p>{food.price}$</p>
               <button onClick={() => removeFromCart(index)}>Remove Item</button>
@@ -43,7 +45,11 @@ const Checkout = ({cartItems, setCartItems}) => {
         <div className="total">
           <h1>Total</h1>
           <p>{cartItems.reduce((a, b) => a + b.price, 0)}$</p>
-          <button className="Checkout-btn">Check out</button>
+          <button className="Checkout-btn"
+          onClick={() => {
+            alert(`Your Order is being processed and will arrive shortly`)
+          }}
+          >Order Now</button>
         </div>
       </div>
     </div>
