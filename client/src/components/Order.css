@@ -7,7 +7,7 @@
     border-radius: 20px;
     margin: 1%;
     cursor: pointer;
-    color:black;
+    color:rgb(249, 243, 243);
     max-width: calc(100vw -2rem);
     grid-template-columns: 1fr 1fr 1fr;
     justify-content: center;
@@ -23,13 +23,18 @@
  .food-container {
     color: silver;
     background: white;
-    display: flex;
+    display: grid;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     flex-wrap:wrap;
     background-color: black;
+    grid-template-columns: auto auto auto auto auto;
+    margin: 5px 10px;
+    grid-gap: 10%
+   
  }
+ 
  .header {
     display: flex;
     text-align: center;

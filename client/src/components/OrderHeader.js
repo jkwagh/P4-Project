@@ -9,11 +9,7 @@ function OrderHeader({showing}) {
         <div>
             <div className="d">
                 <h1 className="header"> Welcome TO FlatIron Eats</h1>
-                    <button href= "/cart" className="cart-btn" onClick={() => {setShow(!show)
-                    showing(!show)
-                    }}>
-                        {show? "close" : "View Cart"}
-                    </button>
+                    
                 </div>
             </div>
         );

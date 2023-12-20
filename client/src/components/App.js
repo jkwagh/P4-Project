@@ -19,7 +19,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [user, setUser] = useState(null);
-  const [cart, addToCart] = useState([])
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:5555/customers')
@@ -76,13 +76,13 @@ function App() {
         element: <>
         <Order />
         <OrderHeader />
-        <OrderFood cart={cart} addToCart={addToCart}/>
+        <OrderFood cartItems={cartItems} setCartItems={setCartItems}/>
         </>, 
       },
       {
         path: "/checkout",
         element: <>
-        <Checkout cart={cart} addToCart={addToCart}/>
+        <Checkout cartItems={cartItems} setCartItems= {setCartItems} />
     
         </>
       }
