@@ -33,7 +33,7 @@ const Signup = ({ addCustomer }) => {
             <br />
             <label>
                 Password:
-                <input type="text" name="password" value={formData.password} onChange={handleInputChange} />
+                <input type="password" name="password" value={formData.password} onChange={handleInputChange} />
             </label>
             <br />
             <label>
