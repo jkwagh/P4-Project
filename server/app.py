@@ -30,7 +30,8 @@ class AllCustomers(Resource):
             new_customer = Customer(username=request.json.get('username'), email=request.json.get('email'), phone=request.json.get('phone'), address=request.json.get('address'), password=request.json.get('password'))
             db.session.add(new_customer)
             db.session.commit()
-            return make_response(new_customer.to_dict(), 201)
+            response_body = [new_customer.to_dict(only=('username', 'password', 'address', 'email', 'phone'))]
+            return make_response(response_body, 201)
         except:
             response_body = {
                 "error" : "Customer could not be created"

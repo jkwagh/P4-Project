@@ -47,8 +47,7 @@ function App() {
     fetch('http://localhost:5555/customers', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(formData)
     })
