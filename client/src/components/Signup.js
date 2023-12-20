@@ -1,17 +1,14 @@
 import React, { useState } from "react"
 import NavBar from "./NavBar"
-import App from "./App";
 
-const Signup = ({ addCustomer, newFormData }) => {
+const Signup = ({ addCustomer }) => {
     const [formData, setFormData] = useState({
     address: "",
     email: "",
-    id: '',
     password: "",
     phone: "",
     username: ""
     });
-    const [user, setUser] = useState([])
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -20,7 +17,7 @@ const Signup = ({ addCustomer, newFormData }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData)
+        //console.log(formData)
         addCustomer(formData)
       };
 

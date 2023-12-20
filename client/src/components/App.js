@@ -21,6 +21,13 @@ function App() {
   const [user, setUser] = useState(null);
   const [cart, addToCart] = useState([])
 
+  useEffect(() => {
+    fetch('http://localhost:5555/customers')
+    .then((resp) => resp.json())
+    .then((data) => {
+      setCustomers(data)
+    })
+  }, [])
 
   // useEffect(() => {
   //   fetch("/check_session")
@@ -35,17 +42,19 @@ function App() {
     console.log(user)
   }
 
-  // const newCustomer = (customer) => {
-  //   fetch('/customers', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify()
-  //   })
-  //   .then((resp) => resp.json())
-  //   .then((data) => console.log(data, user))
-  // }
+  const addCustomer = (formData) => {
+    console.log(formData)
+    fetch('http://localhost:5555/customers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then((resp) => resp.json())
+    .then((data) => setCustomers([...customers, data]))
+  }
     const routes = [
       {
         path: "/",
@@ -57,7 +66,7 @@ function App() {
       },
       {
         path: "/signup",
-        element: <Signup/>,
+        element: <Signup addCustomer={addCustomer}/>,
       },
       {
         path: "/admin",
@@ -75,7 +84,7 @@ function App() {
         path: "/checkout",
         element: <>
         <Checkout cart={cart} addToCart={addToCart}/>
-        
+    
         </>
       }
     ]
