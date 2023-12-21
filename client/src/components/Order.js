@@ -15,7 +15,7 @@ const Order = () => {
 
      return ( 
         <div>
-            <NavBar />
+            
         </div>
         
     
