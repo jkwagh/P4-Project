@@ -10,6 +10,7 @@ import OrderFood from "./OrderFood";
 import OrderHeader from "./OrderHeader"
 import About from "./About";
 import Edit from "./Edit";
+import Restaurants from "./Restaurant";
 
 function App() {
   const [customers, setCustomers] = useState([]);
@@ -28,13 +29,27 @@ function App() {
     password: "",
     username: ""
     });
+  const [orders, setOrders] = useState([]);
 
+  const [newOrders, setNewOrders] = useState({
+    customer_id: "",
+    food_id: "",
+    quantity: 0 ,
+  });
 
   useEffect(() => {
     fetch('/customers')
     .then((resp) => resp.json())
     .then((data) => {
       setCustomers(data)
+    })
+  }, [])
+
+  useEffect(() => {
+    fetch('/orders')
+    .then((resp) => resp.json())
+    .then((data) => {
+      setOrders(data)
     })
   }, [])
 
@@ -80,19 +95,23 @@ const addCustomer = (formData) => {
     },
     body: JSON.stringify(formData)
   })
-  .then(resp=> {
-    if(resp.ok){
-      resp.json().then(data => {
-        setCustomers([...customers, data])
-        setPostResult(true)
-      })
-    }
-    else if(resp.status === 401){
-      alert("Error: Please review your information")
-      setPostResult(false)
-    }
-  })
+  .then((resp) => resp.json())
+  .then((data) => setCustomers([...customers, data]))
   }
+  
+  const newOrder = (cartItems) => {
+  fetch('/orders', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(cartItems)
+  })
+  .then((resp) => resp.json())
+  .then((data) => {
+    setOrders([...orders, data])
+  })
+}
 
 const editId = (customerId) => {
   console.log(customerId)
@@ -147,6 +166,8 @@ const handleSearch = (searchQuery) => {
   setSearchResult(search);
 }
 
+
+
     const routes = [
       {
         path: "/",
@@ -175,7 +196,7 @@ const handleSearch = (searchQuery) => {
       {
         path: "/checkout",
         element: <>
-        <Checkout cartItems={cartItems} setCartItems= {setCartItems} />
+        <Checkout cartItems={cartItems} setCartItems= {setCartItems} newOrder={newOrder} newOrders={newOrders} setNewOrders={setNewOrders}/>
     
         </>
       },
@@ -185,7 +206,7 @@ const handleSearch = (searchQuery) => {
       },
       {
         path: "/edit",
-        element: <Edit userToEdit={userToEdit} handleDelete={handleDelete} updateCustomer={updateCustomer} fetchResult={patchResult}/>
+        element: <Edit userToEdit={userToEdit} handleDelete={handleDelete} updateCustomer={updateCustomer}/>
       }
     ]
 

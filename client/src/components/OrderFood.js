@@ -10,8 +10,8 @@ const OrderFood = ({cartItems, setCartItems}) => {
     const [foods, setFoods] = useState([]);
     
     
-    console.log(cartItems);
-
+  
+    console.log(cartItems)
 
 
     
