@@ -10,7 +10,7 @@ import Checkout from "./Checkout";
 import OrderFood from "./OrderFood";
 import OrderHeader from "./OrderHeader"
 import About from "./About";
-
+import Edit from "./Edit"
 
 function App() {
   const [customers, setCustomers] = useState([]);
@@ -18,6 +18,9 @@ function App() {
   const [cart, addToCart] = useState([]);
   const [user, setUser] = useState(null);
   const [cartItems, setCartItems] = useState([]);
+  const [search, setSearch] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
+  const [userToEdit, setUserToEdit] = useState([]);
 
   useEffect(() => {
     fetch('/customers')
@@ -38,17 +41,17 @@ function App() {
   }, []);
 
 //Route user based on LoggedIn status
-  const login = () => {
-    setLoggedIn(true);
-  }
-  const logout = () => {
-    setLoggedIn(false);
-  }
-  useEffect(() => {
-    if (loggedIn) {
-      routeChange;
-    } 
-  })
+  // const login = () => {
+  //   setLoggedIn(true);
+  // }
+  // const logout = () => {
+  //   setLoggedIn(false);
+  // }
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     routeChange();
+  //   } 
+  // })
 
 //Login for existing user
   const handleLogin = (loginFormData) => {
@@ -64,6 +67,7 @@ function App() {
       if(resp.ok){
         resp.json().then(data => {
           setUser(data)
+          console.log(data)
         })
       }
       else if(resp.status === 401){
@@ -83,6 +87,35 @@ const addCustomer = (formData) => {
   .then((resp) => resp.json())
   .then((data) => setCustomers([...customers, data]))
   }
+
+const editId = (customerId) => {
+  console.log(customerId)
+  fetch(`/customers/${customerId}`)
+  .then((resp) => resp.json())
+  .then((data) => setUserToEdit(data))
+}
+
+const handleDelete = (id) => {
+  console.log(id.id)
+  fetch(`customers/${id.id}`, {
+    method: "DELETE"
+  })
+  .then((resp) => {
+    if(resp.ok){
+      alert("Customer Deleted")
+    } else{
+      alert("Error: Unable to delete customer")
+    }
+  })
+}
+
+
+
+const handleSearch = (searchQuery) => {
+  const search = customers.filter((customer) => customer.username.toLowerCase().includes(searchQuery.toLowerCase()));
+  setSearchResult(search);
+}
+
     const routes = [
       {
         path: "/",
@@ -90,7 +123,7 @@ const addCustomer = (formData) => {
       },
       {
         path: "/login",
-        element: <Login loggedIn={loggedIn} onLogin={handleLogin}/>,
+        element: <Login handleLogin={handleLogin}/>,
       },
       {
         path: "/signup",
@@ -98,7 +131,7 @@ const addCustomer = (formData) => {
       },
       {
         path: "/admin",
-        element: <Admin />,
+        element: <Admin handleSearch={handleSearch} searchResult={searchResult} editId={editId}/>,
       },
       {
         path: "/order",
@@ -118,6 +151,10 @@ const addCustomer = (formData) => {
       {
         path: "/about",
         element: <About/>
+      },
+      {
+        path: "/edit",
+        element: <Edit userToEdit={userToEdit} handleDelete={handleDelete}/>
       }
     ]
 

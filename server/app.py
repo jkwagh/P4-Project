@@ -43,14 +43,47 @@ api.add_resource(AllCustomers, '/customers')
 class CustomerById(Resource):
     
     def get(self, id):
-        pass
+        customer = Customer.query.filter(Customer.id == id).first()
+        
+        if customer:
+            response_body = customer.to_dict(rules=('-password',))
+            return make_response(response_body, 200)
+        else:
+            response_body = {
+                'error': 'Customer not found'
+            }
+            return make_response(response_body, 404)
     
     def patch(self, id):
-        pass
-    
+        customer = Customer.query.filter(Customer.id == id).first()
+        if customer: 
+            for attr in request.json:
+                setattr(customer, attr, request.json.get(attr))
+            
+            db.session.commit()
+            
+            response_body = customer.to_dict(rules='-password',)
+            return make_response(response_body, 200)
+        else:
+            response_body = {
+                'error': 'Customer not found'
+            }
+            return make_response(response_body, 404)
+
     def delete(self, id):
-        pass
-    
+        customer = Customer.query.filter(Customer.id == id).first()
+        
+        if customer:
+            db.session.delete(customer)
+            db.session.commit()
+            response_body = {}
+            return make_response(response_body, 204)
+        else:
+            response_body = {
+                'error': 'Customer not found'
+            }
+            return make_response(response_body, 404)
+
 api.add_resource(CustomerById, '/customers/<int:id>')
 
 class AllRestaurants(Resource):

@@ -5,12 +5,11 @@ import App from "./App"
 import { useNavigate } from "react-router-dom";
 
 
-const Login = () => {
+const Login = ({ handleLogin}) => {
     const [loginFormData, setLoginFormData] = useState({
         password: "",
         username: ""
         });
-
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -18,7 +17,7 @@ const Login = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        handleLogin(loginFormData);
     }
 
     return( <div className="mainContainer">
