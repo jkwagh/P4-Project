@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import NavBar from "./NavBar";
 
-const Edit = ({ userToEdit, handleDelete, updateCustomer }) => {
+const Edit = ({ userToEdit, handleDelete, updateCustomer, fetchResult }) => {
     const navigate = useNavigate();
-  
+    useEffect(() => {
+      if (fetchResult === true) {
+          navigate('/login')
+          }
+  }, [fetchResult])
+
     const [editForm, setEditForm] = useState({
       address: "",
       email: "",
@@ -36,7 +42,6 @@ const Edit = ({ userToEdit, handleDelete, updateCustomer }) => {
   
     const onDeleteClick = () => {
       handleDelete(editForm);
-      navigate('/admin');
     };
   
     const onChange = (e) => {
@@ -46,8 +51,7 @@ const Edit = ({ userToEdit, handleDelete, updateCustomer }) => {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-  
-      // Compare the form state to the initial state
+
       const hasChanged = Object.keys(editForm).some(
         (key) => editForm[key] !== initialForm[key]
       );
@@ -55,13 +59,13 @@ const Edit = ({ userToEdit, handleDelete, updateCustomer }) => {
       if (hasChanged) {
         updateCustomer({ id: userToEdit.id, ...editForm });
       } else {
-        // Handle case where no changes are made
         console.log("No changes detected");
       }
     };
   
     return (
       <div>
+        <NavBar />
         Edit
         <button onClick={onDeleteClick} value={userToEdit.id}>
           Delete User

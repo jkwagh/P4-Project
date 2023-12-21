@@ -22,6 +22,8 @@ function App() {
   const [userToEdit, setUserToEdit] = useState([]);
   const [patchFormData, setPatchFormData] = useState([]);
   const [fetchResult, setFetchResult] = useState(false);
+  const [postResult, setPostResult] = useState(false);
+  const [patchResult, setPatchResult] = useState(false);
   const [loginFormData, setLoginFormData] = useState({
     password: "",
     username: ""
@@ -70,6 +72,7 @@ function App() {
   }
 //add a new customer from Signup page
 const addCustomer = (formData) => {
+  console.log(formData)
   fetch('/customers', {
     method: 'POST',
     headers: {
@@ -77,8 +80,18 @@ const addCustomer = (formData) => {
     },
     body: JSON.stringify(formData)
   })
-  .then((resp) => resp.json())
-  .then((data) => setCustomers([...customers, data]))
+  .then(resp=> {
+    if(resp.ok){
+      resp.json().then(data => {
+        setCustomers([...customers, data])
+        setPostResult(true)
+      })
+    }
+    else if(resp.status === 401){
+      alert("Error: Please review your information")
+      setPostResult(false)
+    }
+  })
   }
 
 const editId = (customerId) => {
@@ -120,8 +133,11 @@ const updateCustomer = (editForm) => {
           return customer
         }
       })))
+      setPatchResult(true)
     } else {
+      setPatchResult(false)
       alert("Error: Unable to update customer")
+      
     }
   })
 }
@@ -142,7 +158,7 @@ const handleSearch = (searchQuery) => {
       },
       {
         path: "/signup",
-        element: <Signup addCustomer={addCustomer}/>,
+        element: <Signup addCustomer={addCustomer} fetchResult={postResult}/>,
       },
       {
         path: "/admin",
@@ -169,7 +185,7 @@ const handleSearch = (searchQuery) => {
       },
       {
         path: "/edit",
-        element: <Edit userToEdit={userToEdit} handleDelete={handleDelete} updateCustomer={updateCustomer}/>
+        element: <Edit userToEdit={userToEdit} handleDelete={handleDelete} updateCustomer={updateCustomer} fetchResult={patchResult}/>
       }
     ]
 

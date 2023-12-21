@@ -1,14 +1,19 @@
 // Import React and useState from React
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./Signup.css"
 import NavBar from './NavBar';
 import { useNavigate } from 'react-router-dom';
 
-
-
-
 // Component for the Sign Up form
-const SignUp = ({ addCustomer }) => {
+const SignUp = ({ addCustomer, fetchResult }) => {
+  
+  const navigate = useNavigate();
+  useEffect(() => {
+      if (fetchResult === true) {
+                  navigate('/login')
+          }
+  }, [fetchResult])
+
   const [animatedClass, setAnimatedClass] = useState('');
   const [formData, setFormData]= useState({
   address: "",
@@ -17,7 +22,6 @@ const SignUp = ({ addCustomer }) => {
   phone:"",
   });
 
-  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const {name, value} = e.target;
@@ -28,14 +32,13 @@ const SignUp = ({ addCustomer }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addCustomer(formData)
-    navigate('/login')
 };
 
 
   return (
     <div className="wrapper">
 
-<div className={`form-container signup ${animatedClass}`}>
+<div className={`form-container sign-up ${animatedClass}`}>
       <form onSubmit={handleSubmit}>
         <h2>Sign up</h2>
 
@@ -55,6 +58,12 @@ const SignUp = ({ addCustomer }) => {
           <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
           <i className="fas fa-at"></i>
           <label htmlFor="email">Enter you email</label>
+        </div>
+
+        <div className="form-group">
+          <input type="phone" name="phone" value={formData.phone} onChange={handleInputChange} required />
+          <i className="fas fa-at"></i>
+          <label htmlFor="phone">Enter you Phone Number</label>
         </div>
 
         <div className="form-group">
