@@ -4,7 +4,6 @@ import "./OrderFood.css";
 import "./OrderFood";
 
 function OrderHeader({showing}) {
-    const [show, setShow] = React.useState(false);
     return (
         <div>
             <div className="d">

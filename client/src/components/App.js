@@ -10,6 +10,7 @@ import OrderFood from "./OrderFood";
 import OrderHeader from "./OrderHeader"
 import About from "./About";
 import Edit from "./Edit"
+;
 
 function App() {
   const [customers, setCustomers] = useState([]);

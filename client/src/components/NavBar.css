@@ -1,23 +1,22 @@
 .navBar{
-    background-color: yellow;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    background-color: #ff8800;
+    height: 100px;
     align-items: center;
     padding: 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    
     
 }
-.inputButton{
-  top:0;
-  right: 0;
-  position: absolute;
-  
-}
-.inputButton-signup{
-    top:0;
-    right: 100px;
-    position:absolute;
 
+.navBar a{
+    text-decoration: none;
+    font-size: 25px;
+    font-style: oblique;
+}
+
+.nav {
+    
 }
 

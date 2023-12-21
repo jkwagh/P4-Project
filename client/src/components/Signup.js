@@ -35,7 +35,7 @@ const SignUp = ({ addCustomer }) => {
   return (
     <div className="wrapper">
 
-<div className={`form-container sign-up ${animatedClass}`}>
+<div className={`form-container signup ${animatedClass}`}>
       <form onSubmit={handleSubmit}>
         <h2>Sign up</h2>
 

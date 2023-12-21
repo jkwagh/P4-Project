@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react"
 import NavBar from "./NavBar";
-import { useNavigate } from "react-router-dom";
+
 import "./Signup.css";
 import App from "./App"
+<<<<<<< HEAD
 
 
 
@@ -25,6 +26,32 @@ const Login = ({ handleLogin, fetchResult, loginFormData, setLoginFormData }) =>
     }
     const handleSubmit = (e) =>{
         // setAnimatedClass('animated-signup');
+=======
+import { useNavigate } from "react-router-dom";
+import "./Signup.css"
+
+
+const Login = ({ handleLogin }) => {
+    const [animatedClass, setAnimatedClass] = useState('');
+    const [loginFormData, setLoginFormData] = useState({
+        password: "",
+        username: ""
+        
+        });
+    
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setLoginFormData({ ...loginFormData, [name]: value})
+        setAnimatedClass('animated-signup');
+    }
+
+
+   
+const handleSubmit = (e) =>{
+        setAnimatedClass('animated-signup');
+        
+>>>>>>> origin/main
         e.preventDefault();
         handleLogin(loginFormData)
         console.log(fetchResult)    
