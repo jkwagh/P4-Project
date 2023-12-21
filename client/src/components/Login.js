@@ -1,21 +1,27 @@
 import React, { useState } from "react"
 import NavBar from "./NavBar";
-import { useNavigate, useOutletContext } from "react-router-dom";
 import "./Login.css"
 import App from "./App"
+import { useNavigate } from "react-router-dom";
 
 
-const Login = ({ onLogin }) => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const login = useOutletContext();
+const Login = () => {
+    const [loginFormData, setLoginFormData] = useState({
+        password: "",
+        username: ""
+        });
 
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setLoginFormData({ ...loginFormData, [name]: value})
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
-        onLogin()
+
     }
 
-    return <div className="mainContainer">
+    return( <div className="mainContainer">
         <NavBar />
         <div className="titleContainer">
             <div>Login</div>
@@ -25,20 +31,22 @@ const Login = ({ onLogin }) => {
             <div className="inputContainer">
                 <input
                     type="text"
-                    value={username}
+                    name="username"
+                    value={loginFormData.username}
                     className="inputBox"
                     placeholder="Enter username here"
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={handleInputChange}
                 />
             </div>
             <br />
             <div className="inputContainer">
                 <input
                     type="text"
-                    value={password}
+                    name="password"
+                    value={loginFormData.password}
                     className="inputBox"
                     placeholder="Enter password here"
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={handleInputChange}
                 />
             </div>
             <br />
@@ -47,6 +55,7 @@ const Login = ({ onLogin }) => {
             </div>
         </form>
         </div>
+    )
 
   };
 

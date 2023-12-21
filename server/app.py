@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Standard library imports
-
+import ipdb
 # Remote library imports
 from flask import request, make_response, session, Flask
 from flask_restful import Api, Resource
@@ -76,24 +76,27 @@ api.add_resource(AllFoods, '/foods')
 
 class Login(Resource):
     
-    def get(self):
-        pass
-    
     def post(self):
-        user = Customer.query.filter(
-            Customer.username == request.get_json()['username']
-        ).first()
+        customer = Customer.query.filter_by(username=request.json.get('username')).first()
         
-        session['customer_id'] = user.id
-        return user.to_dict()
+        if customer:
+            session['customer_id'] = customer.id
+            response_body = customer.to_dict(rules=('-password',))
+            return make_response(response_body, 201)
+        else:
+            response_body = {
+                "error": "Invalid username!"
+            }
+            return make_response(response_body, 401)
     
 api.add_resource(Login, '/login')
     
 class CheckSession(Resource):
     def get(self):
-        user = Customer.query.filter(Customer.id == session.get('customer_id')).first()
-        if user:
-            return user.to_dict()
+        customer = Customer.query.filter(Customer.id == session.get('customer_id')).first()
+        if customer:
+            response_body = customer.to_dict(rules=('-passwords',))
+            return make_response(response_body, 200)
         else:
             return {'message': '401: Not Authorized'}, 401
         
