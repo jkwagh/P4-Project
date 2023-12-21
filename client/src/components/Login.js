@@ -1,15 +1,17 @@
 import React, { useState } from "react"
 import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
-import "./Login.css"
+import "./Signup.css";
 import App from "./App"
 
 
 const Login = ({ onLogin }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [animatedClass, setAnimatedClass] = useState('');
    
-    function handleSubmit(e) {
+const handleSubmit = (e) =>{
+        setAnimatedClass('animated-signup');
         
         e.preventDefault();
 

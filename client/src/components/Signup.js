@@ -1,63 +1,89 @@
-import React, { useState } from "react"
-import NavBar from "./NavBar"
+// Import React and useState from React
+import React, { useState } from 'react';
+import "./Signup.css"
+import NavBar from './NavBar';
 
-const Signup = ({ addCustomer }) => {
-    const [formData, setFormData] = useState({
-    address: "",
-    email: "",
-    password: "",
-    phone: "",
-    username: ""
-    });
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value})
-    }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        //console.log(formData)
-        addCustomer(formData)
-      };
 
-    return ( 
-        <div>
-            <NavBar />
-            <h1>Signup</h1>
-            <form onSubmit={handleSubmit}>
-            <label>
-                Username:
-                <input type="text" name="username" value={formData.username} onChange={handleInputChange} />
-            </label>
-            <br />
-            <label>
-                Password:
-                <input type="password" name="password" value={formData.password} onChange={handleInputChange} />
-            </label>
-            <br />
-            <label>
-                Address:
-                <input type="text" name="address" value={formData.address} onChange={handleInputChange} />
-            </label>
-            <br />
-            <label>
-                Phone:
-                <input type="text" name="phone" value={formData.phone} onChange={handleInputChange} />
-            </label>
-            <br />
-            <label>
-                E-mail:
-                <input type="text" name="email" value={formData.email} onChange={handleInputChange} />
-            </label>
-            <br />
-            <button type="submit">
-                Submit
-            </button>
-            </form>
+// Component for the Sign Up form
+const SignUp = ({ addCustomer }) => {
+  const [animatedClass, setAnimatedClass] = useState('');
+  const [formData, setFormData]= useState({
+  address: "",
+  email: "",
+  password:"",
+  phone:"",
+});
+
+  const handleInputChange = (e) => {
+    const {name, value} = e.target;
+    setFormData({...formData, [name]: value})
+    setAnimatedClass('animated-signin');
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addCustomer(formData)
+};
+
+
+  return (
+    <div className="wrapper">
+
+<div className={`form-container sign-up ${animatedClass}`}>
+      <form onSubmit={handleSubmit}>
+        <h2>Sign up</h2>
+
+        <div className="form-group">
+          <input type="text" name="username" value={formData.username} onChange={handleInputChange} required />
+          <i className="fas fa-user"></i>
+          <label htmlFor="username">Create a username</label>
         </div>
-        
-    )
-}
 
-export default Signup
+<div className="form-group">
+          <input type="address" name="address" value={formData.address} onChange={handleInputChange} required />
+          <i className="fas fa-lock"></i>
+          <label htmlFor="">Enter your Address</label>
+        </div>
+
+        <div className="form-group">
+          <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
+          <i className="fas fa-at"></i>
+          <label htmlFor="email">Enter you email</label>
+        </div>
+
+        <div className="form-group">
+          <input type="password" name="password" value={formData.password} onChange={handleInputChange} required />
+          <i className="fas fa-lock"></i>
+          <label htmlFor="password">Create a password</label>
+        </div>
+
+        <div className="form-group">
+          <input type="password" required />
+          <i className="fas fa-lock"></i>
+          <label htmlFor="">confirm password</label>
+        </div>
+
+        <button type="submit" className="btn">
+          sign up
+        </button>
+        <div className="link">
+          <p>
+            You already have an account?
+            <a href="#" className="signin-link" onClick={handleInputChange}>
+              {' '}
+              sign in
+            </a>
+          </p>
+        </div>
+      </form>
+    </div>
+
+    </div>
+    
+  );
+};
+
+export default SignUp;
+
