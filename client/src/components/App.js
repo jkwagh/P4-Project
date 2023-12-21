@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import Home from "./Home";
 import Login from "./Login";
 import Signup from "./Signup";
@@ -22,6 +21,12 @@ function App() {
   const [searchResult, setSearchResult] = useState([]);
   const [userToEdit, setUserToEdit] = useState([]);
   const [patchFormData, setPatchFormData] = useState([]);
+  const [fetchResult, setFetchResult] = useState(false);
+  const [loginFormData, setLoginFormData] = useState({
+    password: "",
+    username: ""
+    });
+
 
   useEffect(() => {
     fetch('/customers')
@@ -42,21 +47,12 @@ function App() {
   }, []);
 
 //Route user based on LoggedIn status
-  // const login = () => {
-  //   setLoggedIn(true);
-  // }
-  // const logout = () => {
-  //   setLoggedIn(false);
-  // }
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     routeChange();
-  //   } 
-  // })
+// if (user) {
+//   navigate('/order')
+// }
 
 //Login for existing user
   const handleLogin = (loginFormData) => {
-    console.log(loginFormData)
     fetch('/login', {
       method: "POST",
       headers: {
@@ -68,11 +64,12 @@ function App() {
       if(resp.ok){
         resp.json().then(data => {
           setUser(data)
-          console.log(data)
+          setFetchResult(true)
         })
       }
       else if(resp.status === 401){
         alert("Error: Invalid Username")
+        setFetchResult(false)
       }
     })
   }
@@ -146,7 +143,7 @@ const handleSearch = (searchQuery) => {
       },
       {
         path: "/login",
-        element: <Login handleLogin={handleLogin}/>,
+        element: <Login handleLogin={handleLogin} fetchResult={fetchResult} setLoginFormData={setLoginFormData} loginFormData={loginFormData}/>,
       },
       {
         path: "/signup",

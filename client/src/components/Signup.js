@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import "./Signup.css"
 import NavBar from './NavBar';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -14,7 +15,9 @@ const SignUp = ({ addCustomer }) => {
   email: "",
   password:"",
   phone:"",
-});
+  });
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const {name, value} = e.target;
@@ -25,6 +28,7 @@ const SignUp = ({ addCustomer }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addCustomer(formData)
+    navigate('/login')
 };
 
 

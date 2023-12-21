@@ -1,23 +1,36 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css";
 import App from "./App"
-import { useNavigate } from "react-router-dom";
 
 
-const Login = ({ onLogin }) => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [animatedClass, setAnimatedClass] = useState('');
-   
-const handleSubmit = (e) =>{
-        setAnimatedClass('animated-signup');
-        
+
+const Login = ({ handleLogin, fetchResult, loginFormData, setLoginFormData }) => {
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (fetchResult === true) {
+                    navigate('/order')
+            }
+    }, [fetchResult])
+    
+    // console.log(fetchResult)
+
+    
+    // const [animatedClass, setAnimatedClass] = useState('');
+    
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setLoginFormData({ ...loginFormData, [name]: value})
+    }
+    const handleSubmit = (e) =>{
+        // setAnimatedClass('animated-signup');
         e.preventDefault();
         handleLogin(loginFormData)
+        console.log(fetchResult)    
     }
 
+    
     return( <div className="mainContainer">
         <NavBar />
         <div className="titleContainer">
