@@ -2,11 +2,6 @@ import React, { useEffect, useState } from "react"
 import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css";
-import App from "./App"
-
-import { useNavigate } from "react-router-dom";
-import "./Signup.css"
-
 
 const Login = ({ handleLogin, fetchResult, loginFormData, setLoginFormData }) => {
     const navigate = useNavigate()
@@ -16,42 +11,16 @@ const Login = ({ handleLogin, fetchResult, loginFormData, setLoginFormData }) =>
             }
     }, [fetchResult])
     
-    // console.log(fetchResult)
-
-    
-    // const [animatedClass, setAnimatedClass] = useState('');
-    
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setLoginFormData({ ...loginFormData, [name]: value})
-    }
-    const handleSubmit = (e) =>{
-        // setAnimatedClass('animated-signup');
-const Login = ({ handleLogin }) => {
     const [animatedClass, setAnimatedClass] = useState('');
-    const [loginFormData, setLoginFormData] = useState({
-        password: "",
-        username: ""
-        
-        });
-    
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setLoginFormData({ ...loginFormData, [name]: value})
-        setAnimatedClass('animated-signup');
     }
-
-
-   
-const handleSubmit = (e) =>{
-        setAnimatedClass('animated-signup');
-        
+    const handleSubmit = (e) => {
         e.preventDefault();
         handleLogin(loginFormData)
     }
-
-    
     return( <div className="mainContainer">
         <NavBar />
         <div className="titleContainer">
@@ -87,7 +56,5 @@ const handleSubmit = (e) =>{
         </form>
         </div>
     )
-
   };
-
 export default Login
