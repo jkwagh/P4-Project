@@ -48,7 +48,7 @@ const SignUp = ({ addCustomer, fetchResult }) => {
           <label htmlFor="username">Create a username</label>
         </div>
 
-<div className="form-group">
+        <div className="form-group">
           <input type="address" name="address" value={formData.address} onChange={handleInputChange} required />
           <i className="fas fa-lock"></i>
           <label htmlFor="">Enter your Address</label>
