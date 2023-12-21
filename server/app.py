@@ -46,7 +46,7 @@ class CustomerById(Resource):
         customer = Customer.query.filter(Customer.id == id).first()
         
         if customer:
-            response_body = customer.to_dict(rules=('-password',))
+            response_body = customer.to_dict(only=('username', 'password', 'address', 'email', 'phone', 'id'))
             return make_response(response_body, 200)
         else:
             response_body = {
@@ -62,7 +62,7 @@ class CustomerById(Resource):
             
             db.session.commit()
             
-            response_body = customer.to_dict(rules='-password',)
+            response_body = customer.to_dict(only=('username', 'password', 'address', 'email', 'phone', 'id'))
             return make_response(response_body, 200)
         else:
             response_body = {

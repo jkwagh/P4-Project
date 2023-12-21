@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import NavBar from "./NavBar"
+import { useNavigate } from "react-router-dom";
 
 const Signup = ({ addCustomer }) => {
     const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const Signup = ({ addCustomer }) => {
     phone: "",
     username: ""
     });
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -17,7 +19,8 @@ const Signup = ({ addCustomer }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addCustomer(formData)
+        addCustomer(formData);
+        navigate('/order')
       };
 
     return ( 

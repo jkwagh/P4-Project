@@ -21,6 +21,7 @@ function App() {
   const [search, setSearch] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
   const [userToEdit, setUserToEdit] = useState([]);
+  const [patchFormData, setPatchFormData] = useState([]);
 
   useEffect(() => {
     fetch('/customers')
@@ -96,7 +97,7 @@ const editId = (customerId) => {
 }
 
 const handleDelete = (id) => {
-  console.log(id.id)
+  console.log(id)
   fetch(`customers/${id.id}`, {
     method: "DELETE"
   })
@@ -109,7 +110,29 @@ const handleDelete = (id) => {
   })
 }
 
-
+const updateCustomer = (editForm) => {
+  fetch(`customers/${editForm.id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(editForm)
+  })
+  .then((resp) => {
+    if(resp.ok) {
+      resp.json().then((data) => setCustomers(customers.map(customer => {
+        if (customer.id === data.id) {
+          return data
+        }
+        else {
+          return customer
+        }
+      })))
+    } else {
+      alert("Error: Unable to update customer")
+    }
+  })
+}
 
 const handleSearch = (searchQuery) => {
   const search = customers.filter((customer) => customer.username.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -154,7 +177,7 @@ const handleSearch = (searchQuery) => {
       },
       {
         path: "/edit",
-        element: <Edit userToEdit={userToEdit} handleDelete={handleDelete}/>
+        element: <Edit userToEdit={userToEdit} handleDelete={handleDelete} updateCustomer={updateCustomer}/>
       }
     ]
 

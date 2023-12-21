@@ -17,7 +17,7 @@ const Login = ({ handleLogin}) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleLogin(loginFormData);
+        handleLogin(loginFormData)
     }
 
     return( <div className="mainContainer">
