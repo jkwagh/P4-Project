@@ -9,8 +9,7 @@ import Checkout from "./Checkout";
 import OrderFood from "./OrderFood";
 import OrderHeader from "./OrderHeader"
 import About from "./About";
-import Edit from "./Edit"
-;
+import Edit from "./Edit";
 
 function App() {
   const [customers, setCustomers] = useState([]);
@@ -46,11 +45,6 @@ function App() {
       }
     })
   }, []);
-
-//Route user based on LoggedIn status
-// if (user) {
-//   navigate('/order')
-// }
 
 //Login for existing user
   const handleLogin = (loginFormData) => {

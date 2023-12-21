@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import "./Signup.css";
 
 const Login = ({ handleLogin, fetchResult, loginFormData, setLoginFormData }) => {
+    
+    console.log(loginFormData)
+    
     const navigate = useNavigate()
     useEffect(() => {
         if (fetchResult === true) {
@@ -16,6 +19,7 @@ const Login = ({ handleLogin, fetchResult, loginFormData, setLoginFormData }) =>
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setLoginFormData({ ...loginFormData, [name]: value})
+        setAnimatedClass('animated-signup')
     }
     const handleSubmit = (e) => {
         e.preventDefault();
