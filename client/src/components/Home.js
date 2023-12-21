@@ -27,12 +27,8 @@ const Home = (props) => {
    </div>
     <div className="mainContainer1">
       
-      <h1>Hello</h1> 
-      <div className="nameContainer">
-      <h1> Flatiron Eats</h1>
-
-
-      </div>
+      
+      
 
 
       

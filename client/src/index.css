@@ -1,26 +1,6 @@
-:root {
-  --mainColor: #2d82b5;
-  --whiteColor: #ffffff;
-  --titleColor: #555555;
-  --labelColor: #333333;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: poppins, sans-serif;
-}
 html {
-  scroll-behavior: smooth;
-  font-size: 62.5%;
-}
-
-body {
-  background: linear-gradient(to right, #da4453, var(--mainColor));
-  font-weight: 400;
-  min-height: 100vh;
-  display: grid;
-  place-content : center;
-  overflow: hidden;
+  height: 100dvh;
+  width: 100dvw;
+  
+  
 }

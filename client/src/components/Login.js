@@ -1,15 +1,28 @@
 import React, { useState } from "react"
 import NavBar from "./NavBar";
-import { useNavigate } from "react-router-dom";
+
 import "./Signup.css";
 import App from "./App"
 import { useNavigate } from "react-router-dom";
+import "./Signup.css"
 
 
-const Login = ({ onLogin }) => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+const Login = ({ handleLogin }) => {
     const [animatedClass, setAnimatedClass] = useState('');
+    const [loginFormData, setLoginFormData] = useState({
+        password: "",
+        username: ""
+        
+        });
+    
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setLoginFormData({ ...loginFormData, [name]: value})
+        setAnimatedClass('animated-signup');
+    }
+
+
    
 const handleSubmit = (e) =>{
         setAnimatedClass('animated-signup');
