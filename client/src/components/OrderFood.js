@@ -5,12 +5,12 @@ import './Order.css'
 
 
 
-const OrderFood = ({cart, addToCart}) => {
+const OrderFood = ({cartItems, setCartItems}) => {
 
     const [foods, setFoods] = useState([]);
     
     
-    console.log(cart);
+    console.log(cartItems);
 
     let navigate = useNavigate();
     // const routeChange = () => {
@@ -32,34 +32,21 @@ const OrderFood = ({cart, addToCart}) => {
     return (
         <div>
             
-
-                {/* {cart && cart.map((item, index) => {
-                return (
-                    <div
-                    style={{ backgroundImage: `url(${item.image})` }}
-                    className="cart"
-                    key={index}
-                    >
-                    <h3>{item.name}</h3>
-                    <p>{item.amount}$</p>
-                    
-                    </div>
-                );
-                })} */}
             <div className="food-container">
             {filteredFoods.map((foods) => (
-                 <div
-            style={{backgroundImage: `url(${foods.img})`}}
-               className='foods'
+                <div
+            style={{backgroundImage: `url(${foods.img})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
+            className='foods'
             >
                 <h3>{foods.name}</h3>
                 <p>{foods.price}</p>
                 <p>{foods.restaurant_name}</p>
                 <button className="btn"
-                onClick={() => {
+                onClick={(e) => {
+                    e.preventDefault()
+                    e.target.reset()
                     alert(`${foods.name} added to cart!`);
-                addToCart([...cart, foods]);
-                
+                setCartItems([...cartItems, foods]);
             }}
             >
                 Add to basket

@@ -9,6 +9,7 @@ import Order from "./Order";
 import Checkout from "./Checkout";
 import OrderFood from "./OrderFood";
 import OrderHeader from "./OrderHeader"
+import About from "./About";
 
 
 function App() {
@@ -16,11 +17,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [cart, addToCart] = useState([]);
   const [user, setUser] = useState(null);
-  let navigate = useNavigate();
-  const routeChange = () => {
-    let path = '/order';
-    navigate(path);
-  } 
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     fetch('/customers')
@@ -86,39 +83,43 @@ const addCustomer = (formData) => {
   .then((resp) => resp.json())
   .then((data) => setCustomers([...customers, data]))
   }
-const routes = [
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/login",
-    element: <Login login={login} handleLogin={handleLogin}/>,
-  },
-  {
-    path: "/signup",
-    element: <Signup addCustomer={addCustomer}/>,
-  },
-  {
-    path: "/admin",
-    element: <Admin />,
-  },
-  {
-    path: "/order",
-    element: <>
-    <Order />
-    <OrderHeader />
-    <OrderFood cart={cart} addToCart={addToCart}/>
-    </>, 
-  },
-  {
-    path: "/checkout",
-    element: <>
-    <Checkout cart={cart} addToCart={addToCart}/>
-
-    </>
-  }
-]
+    const routes = [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <Login loggedIn={loggedIn} onLogin={handleLogin}/>,
+      },
+      {
+        path: "/signup",
+        element: <Signup addCustomer={addCustomer}/>,
+      },
+      {
+        path: "/admin",
+        element: <Admin />,
+      },
+      {
+        path: "/order",
+        element: <>
+        <Order />
+        <OrderHeader />
+        <OrderFood cartItems={cartItems} setCartItems={setCartItems}/>
+        </>, 
+      },
+      {
+        path: "/checkout",
+        element: <>
+        <Checkout cartItems={cartItems} setCartItems= {setCartItems} />
+    
+        </>
+      },
+      {
+        path: "/about",
+        element: <About/>
+      }
+    ]
 
 const router = createBrowserRouter(
   routes
