@@ -5,8 +5,6 @@ import "./Signup.css";
 
 const Login = ({ handleLogin, fetchResult, loginFormData, setLoginFormData }) => {
     
-    console.log(loginFormData)
-    
     const navigate = useNavigate()
     useEffect(() => {
         if (fetchResult === true) {
@@ -25,7 +23,13 @@ const Login = ({ handleLogin, fetchResult, loginFormData, setLoginFormData }) =>
         e.preventDefault();
         handleLogin(loginFormData)
     }
-    return( <div className="mainContainer">
+
+    const handleClick = (e) => {
+        navigate('/admin')
+    }
+
+    return( 
+        <div className="mainContainer">
         <NavBar />
         <div className="titleContainer">
             <div>Login</div>
@@ -58,6 +62,8 @@ const Login = ({ handleLogin, fetchResult, loginFormData, setLoginFormData }) =>
                 <button type="submit" className="inputButton">Login</button>
             </div>
         </form>
+        <br />
+        <button onClick={handleClick}>Admin</button>
         </div>
     )
   };
