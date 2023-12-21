@@ -42,9 +42,7 @@ const OrderFood = ({cartItems, setCartItems}) => {
                 <p>{foods.price}</p>
                 <p>{foods.restaurant_name}</p>
                 <button className="btn"
-                onClick={(e) => {
-                    e.preventDefault()
-                    e.target.reset()
+                onClick={() => {
                     alert(`${foods.name} added to cart!`);
                 setCartItems([...cartItems, foods]);
             }}
