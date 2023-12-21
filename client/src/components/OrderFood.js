@@ -12,11 +12,7 @@ const OrderFood = ({cartItems, setCartItems}) => {
     
     console.log(cartItems);
 
-    let navigate = useNavigate();
-    // const routeChange = () => {
-    //   let path = `/Checkout`;
-    //   navigate(path);
-    // }
+
 
     
     useEffect(() => {
