@@ -3,6 +3,7 @@ import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css";
 import App from "./App"
+import { useNavigate } from "react-router-dom";
 
 
 const Login = ({ onLogin }) => {
@@ -14,21 +15,10 @@ const handleSubmit = (e) =>{
         setAnimatedClass('animated-signup');
         
         e.preventDefault();
-
-        fetch("/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username }),
-        })
-        .then((resp) => resp.json())
-        .then((user) => {
-            onLogin(user)
-        })
+        handleLogin(loginFormData)
     }
 
-    return <div className="mainContainer">
+    return( <div className="mainContainer">
         <NavBar />
         <div className="titleContainer">
             <div>Login</div>
@@ -38,20 +28,22 @@ const handleSubmit = (e) =>{
             <div className="inputContainer">
                 <input
                     type="text"
-                    value={username}
+                    name="username"
+                    value={loginFormData.username}
                     className="inputBox"
                     placeholder="Enter username here"
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={handleInputChange}
                 />
             </div>
             <br />
             <div className="inputContainer">
                 <input
                     type="text"
-                    value={password}
+                    name="password"
+                    value={loginFormData.password}
                     className="inputBox"
                     placeholder="Enter password here"
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={handleInputChange}
                 />
             </div>
             <br />
@@ -60,6 +52,7 @@ const handleSubmit = (e) =>{
             </div>
         </form>
         </div>
+    )
 
   };
 

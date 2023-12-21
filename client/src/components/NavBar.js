@@ -26,25 +26,8 @@ const NavBar = (props) => {
              <NavLink to="/">Home</NavLink>
              <NavLink to="/Order">Order</NavLink>
              <NavLink to="/checkout">Checkout</NavLink>
-             {/* <NavLink to="/Login" className= "Login">Login</NavLink>
-             <NavLink to="/Signup" className="Signup">Signup</NavLink>  */}
-             <NavLink to="/About">About</NavLink>
-             
-        <input
-          className={"inputButton"}
-          type="button"
-          onClick={onLoginClick}
-          value={loggedIn ? "Log out" : "Log in"}
-        />
-        {loggedIn ? <div>Your email address is {email}</div> : <div />}
-        <input
-          className={"inputButton-signup"}
-          type="button"
-          onClick={onSignupClick}
-          value="Signup"
-        />
-        
-             
+             {/* <NavLink to="/Login" className={Login}>Login</NavLink>
+             <NavLink to="/Signup" className={Signup}>Signup</NavLink> */}
         </nav>
         </div>
        

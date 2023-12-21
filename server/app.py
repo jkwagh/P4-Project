@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Standard library imports
-
+import ipdb
 # Remote library imports
 from flask import request, make_response, session, Flask
 from flask_restful import Api, Resource
@@ -43,14 +43,47 @@ api.add_resource(AllCustomers, '/customers')
 class CustomerById(Resource):
     
     def get(self, id):
-        pass
+        customer = Customer.query.filter(Customer.id == id).first()
+        
+        if customer:
+            response_body = customer.to_dict(only=('username', 'password', 'address', 'email', 'phone', 'id'))
+            return make_response(response_body, 200)
+        else:
+            response_body = {
+                'error': 'Customer not found'
+            }
+            return make_response(response_body, 404)
     
     def patch(self, id):
-        pass
-    
+        customer = Customer.query.filter(Customer.id == id).first()
+        if customer: 
+            for attr in request.json:
+                setattr(customer, attr, request.json.get(attr))
+            
+            db.session.commit()
+            
+            response_body = customer.to_dict(only=('username', 'password', 'address', 'email', 'phone', 'id'))
+            return make_response(response_body, 200)
+        else:
+            response_body = {
+                'error': 'Customer not found'
+            }
+            return make_response(response_body, 404)
+
     def delete(self, id):
-        pass
-    
+        customer = Customer.query.filter(Customer.id == id).first()
+        
+        if customer:
+            db.session.delete(customer)
+            db.session.commit()
+            response_body = {}
+            return make_response(response_body, 204)
+        else:
+            response_body = {
+                'error': 'Customer not found'
+            }
+            return make_response(response_body, 404)
+
 api.add_resource(CustomerById, '/customers/<int:id>')
 
 class AllRestaurants(Resource):
@@ -76,24 +109,27 @@ api.add_resource(AllFoods, '/foods')
 
 class Login(Resource):
     
-    def get(self):
-        pass
-    
     def post(self):
-        user = Customer.query.filter(
-            Customer.username == request.get_json()['username']
-        ).first()
+        customer = Customer.query.filter_by(username=request.json.get('username')).first()
         
-        session['customer_id'] = user.id
-        return user.to_dict()
+        if customer:
+            session['customer_id'] = customer.id
+            response_body = customer.to_dict(rules=('-password',))
+            return make_response(response_body, 201)
+        else:
+            response_body = {
+                "error": "Invalid username!"
+            }
+            return make_response(response_body, 401)
     
 api.add_resource(Login, '/login')
     
 class CheckSession(Resource):
     def get(self):
-        user = Customer.query.filter(Customer.id == session.get('customer_id')).first()
-        if user:
-            return user.to_dict()
+        customer = Customer.query.filter(Customer.id == session.get('customer_id')).first()
+        if customer:
+            response_body = customer.to_dict(rules=('-passwords',))
+            return make_response(response_body, 200)
         else:
             return {'message': '401: Not Authorized'}, 401
         

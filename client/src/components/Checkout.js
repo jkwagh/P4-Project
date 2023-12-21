@@ -33,7 +33,9 @@ const Checkout = ({cartItems, setCartItems}) => {
         <div className="cart-list">
           <h1>Cart</h1>
           {cartItems.map((food, index) => (
-            <div key={index}>
+            <div className="food-cart" key={index}
+            style={{backgroundImage: `url(${food.img})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
+              
               <h3>{food.name}</h3>
               <p>{food.price}$</p>
               <button onClick={() => removeFromCart(index)}>Remove Item</button>
