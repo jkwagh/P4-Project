@@ -105,6 +105,19 @@ api.add_resource(AllFoods, '/foods')
 #         response_body = [restaurant_food.to_dict(rules = ['-restaurants.restaurant_food','-food.restaurant_food']) for restaurant_food in RestaurantFood.query.all()]
 #         return make_response(response_body, 200)
     
+#     def post(self):
+#         try:
+#             new_restaurant_food = RestaurantFood(restaurants=request.json.get('restaurants'), food=request.json.get('food'), price=request.json.get('price'), rating=request.json.get('rating'))
+#             db.session.add(new_restaurant_food)
+#             db.session.commit()
+#             response_body = [new_restaurant_food.to_dict(rules = ['-restaurants.restaurant_food','-food.restaurant_food'])]
+#             return make_response(response_body, 201)
+#         except:
+#             response_body = {
+#                 "error" : "Restaurant food could not be created"
+#             }
+#             return make_response(response_body, 400)
+    
 # api.add_resource(AllRestaurantFoods, '/restaurant_foods')
 
 class Login(Resource):
@@ -135,24 +148,24 @@ class CheckSession(Resource):
         
 api.add_resource(CheckSession, '/check_session')
 
-# class AllOrders(Resource):
-#     def get(self):
-#         response_body = [order.to_dict() for order in Order.query.all()]
-#         return make_response(response_body, 200)
+class AllOrders(Resource):
+    def get(self):
+        response_body = [order.to_dict() for order in Order.query.all()]
+        return make_response(response_body, 200)
     
-#     def post(self):
-#         try:
-#             new_order = Order(customer_id=request.json['customer_id'], food_id=request.json['food_id'], quantity=request.json['quantity'])
-#             db.session.add(new_order)
-#             db.session.commit()
-#             return make_response(new_order.to_dict(), 201)
-#         except:
-#             response_body = {
-#                 "error" : "Order could not be created"
-#             }
-#             return make_response(response_body, 400)
+    def post(self):
+        try:
+            new_order = Order(customer_id=request.json['customer_id'], food_id=request.json['food_id'], quantity=request.json['quantity'])
+            db.session.add(new_order)
+            db.session.commit()
+            return make_response(new_order.to_dict(), 201)
+        except:
+            response_body = {
+                "error" : "Order could not be created"
+            }
+            return make_response(response_body, 400)
     
-# api.add_resource(AllOrders, '/orders')
+api.add_resource(AllOrders, '/orders')
 
 
 if __name__ == '__main__':

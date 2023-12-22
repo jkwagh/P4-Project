@@ -22,12 +22,20 @@ function App() {
   const [userToEdit, setUserToEdit] = useState([]);
   const [patchFormData, setPatchFormData] = useState([]);
   const [fetchResult, setFetchResult] = useState(false);
+  const [postResult, setPostResult] = useState(false);
+  const [patchResult, setPatchResult] = useState(false);
+  const [orders, setOrders] = useState([])
   const [loginFormData, setLoginFormData] = useState({
     password: "",
     username: ""
     });
+  const [newCart, setNewCart] = useState({
+      customer_id: 0,
+      food_id: 0,
+      quantity: 0,
+    });
 
-
+  
   useEffect(() => {
     fetch('/customers')
     .then((resp) => resp.json())
@@ -36,7 +44,7 @@ function App() {
     })
   }, [])
 
-//Keep user logged in
+// Keep user logged in
   useEffect(() => {
     fetch("/check_session")
     .then((resp) => {
@@ -45,6 +53,35 @@ function App() {
       }
     })
   }, []);
+
+  useEffect(() => {
+    fetch('/orders')
+    .then((resp) => resp.json())
+    .then((data) => {
+      setOrders(data)
+    })
+  }, [])
+
+  const newOrder = (newCart) => {
+    fetch('/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newCart)
+    })
+    .then((resp) => {
+      if(resp.ok){
+        resp.json()
+    .then((data) => {
+      setOrders([...orders, data])
+    }).then(console.log(orders))
+  }else{
+    alert("Error: Could not")
+  }
+  })
+  }
+  
 
 //Login for existing user
   const handleLogin = (loginFormData) => {
@@ -70,6 +107,7 @@ function App() {
   }
 //add a new customer from Signup page
 const addCustomer = (formData) => {
+  console.log(formData)
   fetch('/customers', {
     method: 'POST',
     headers: {
@@ -80,6 +118,8 @@ const addCustomer = (formData) => {
   .then((resp) => resp.json())
   .then((data) => setCustomers([...customers, data]))
   }
+  
+  
 
 const editId = (customerId) => {
   console.log(customerId)
@@ -120,8 +160,11 @@ const updateCustomer = (editForm) => {
           return customer
         }
       })))
+      setPatchResult(true)
     } else {
+      setPatchResult(false)
       alert("Error: Unable to update customer")
+      
     }
   })
 }
@@ -130,6 +173,8 @@ const handleSearch = (searchQuery) => {
   const search = customers.filter((customer) => customer.username.toLowerCase().includes(searchQuery.toLowerCase()));
   setSearchResult(search);
 }
+
+
 
     const routes = [
       {
@@ -142,7 +187,7 @@ const handleSearch = (searchQuery) => {
       },
       {
         path: "/signup",
-        element: <Signup addCustomer={addCustomer}/>,
+        element: <Signup addCustomer={addCustomer} fetchResult={postResult}/>,
       },
       {
         path: "/admin",
@@ -153,14 +198,13 @@ const handleSearch = (searchQuery) => {
         element: <>
         <Order />
         <OrderHeader />
-        <OrderFood cartItems={cartItems} setCartItems={setCartItems}/>
+        <OrderFood user={user} cartItems={cartItems} setCartItems={setCartItems}/>
         </>, 
       },
       {
         path: "/checkout",
         element: <>
-        <Checkout cartItems={cartItems} setCartItems= {setCartItems} />
-    
+        <Checkout cart={cart} user={user} cartItems={cartItems} setCartItems= {setCartItems} newCart={newCart} setNewCart={setNewCart} newOrder={newOrder}/>
         </>
       },
       {

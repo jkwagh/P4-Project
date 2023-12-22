@@ -10,13 +10,9 @@ const OrderFood = ({cartItems, setCartItems}) => {
     const [foods, setFoods] = useState([]);
     
     
-    console.log(cartItems);
+  
+    console.log(cartItems)
 
-    let navigate = useNavigate();
-    // const routeChange = () => {
-    //   let path = `/Checkout`;
-    //   navigate(path);
-    // }
 
     
     useEffect(() => {
