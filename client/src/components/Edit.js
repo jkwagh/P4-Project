@@ -6,7 +6,7 @@ const Edit = ({ userToEdit, handleDelete, updateCustomer, fetchResult }) => {
     const navigate = useNavigate();
     useEffect(() => {
       if (fetchResult === true) {
-          navigate('/login')
+          navigate('/admin')
           }
   }, [fetchResult])
 
@@ -15,7 +15,8 @@ const Edit = ({ userToEdit, handleDelete, updateCustomer, fetchResult }) => {
       email: "",
       password: "",
       phone: "",
-      username: ""
+      username: "",
+      id: 0,
     });
   
     const [initialForm, setInitialForm] = useState({});
@@ -27,7 +28,8 @@ const Edit = ({ userToEdit, handleDelete, updateCustomer, fetchResult }) => {
         email: userToEdit.email,
         password: userToEdit.password,
         phone: userToEdit.phone,
-        username: userToEdit.username
+        username: userToEdit.username,
+        id: userToEdit.id
       });
   
       // Save the initial form state for comparison
@@ -36,7 +38,8 @@ const Edit = ({ userToEdit, handleDelete, updateCustomer, fetchResult }) => {
         email: userToEdit.email,
         password: userToEdit.password,
         phone: userToEdit.phone,
-        username: userToEdit.username
+        username: userToEdit.username,
+        id: userToEdit.id
       });
     }, [userToEdit]);
   

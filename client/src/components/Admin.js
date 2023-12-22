@@ -13,7 +13,6 @@ const Admin = ({ handleSearch, searchResult, editId }) => {
     }
 
     const handleEditClick = (customerId) => {
-        console.log(customerId)
         editId(customerId)
         navigate('/edit')
       };

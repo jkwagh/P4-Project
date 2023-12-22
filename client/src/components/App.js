@@ -118,26 +118,25 @@ const addCustomer = (formData) => {
   .then((resp) => resp.json())
   .then((data) => setCustomers([...customers, data]))
   }
-  
-  
 
 const editId = (customerId) => {
-  console.log(customerId)
   fetch(`/customers/${customerId}`)
   .then((resp) => resp.json())
   .then((data) => setUserToEdit(data))
 }
 
-const handleDelete = (id) => {
-  console.log(id)
-  fetch(`customers/${id.id}`, {
+const handleDelete = (editForm) => {
+  console.log(editForm)
+  fetch(`customers/${editForm.id}`, {
     method: "DELETE"
   })
   .then((resp) => {
     if(resp.ok){
       alert("Customer Deleted")
+      setPatchResult(true)
     } else{
       alert("Error: Unable to delete customer")
+      setPatchResult(false)
     }
   })
 }
