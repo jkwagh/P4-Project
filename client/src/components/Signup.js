@@ -13,7 +13,7 @@ const SignUp = ({ addCustomer, fetchResult }) => {
           }
   }, [fetchResult])
 
-  const [animatedClass, setAnimatedClass] = useState('');
+  const [animatedClass, setAnimatedClass] = useState('animated-signup');
   const [formData, setFormData]= useState({
   address: "",
   email: "",
@@ -25,12 +25,13 @@ const SignUp = ({ addCustomer, fetchResult }) => {
   const handleInputChange = (e) => {
     const {name, value} = e.target;
     setFormData({...formData, [name]: value})
-    setAnimatedClass('animated-signin');
+    setAnimatedClass('animated-signup');
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addCustomer(formData)
+    navigate('/login')
 };
 
 const handleOnClick = (e) => {
