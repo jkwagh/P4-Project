@@ -4,14 +4,8 @@ import Admin from "./Admin";
 import './Login.css';
 
 
-const Login = ({
-  handleLogin,
-  fetchResult,
-  loginFormData,
-  setLoginFormData,
-}) => {
-  console.log(loginFormData);
-
+const Login = ({ handleLogin, fetchResult, loginFormData, setLoginFormData}) => {
+  
   const [animatedClass, setAnimatedClass] = useState('animated-signin');
   const navigate = useNavigate();
 
@@ -36,8 +30,11 @@ const Login = ({
     e.preventDefault();
     navigate('/signup')
   }
-  
 
+  const adminClick = (e) => {
+    e.preventDefault();
+    navigate('/admin')
+  }
 
   return (
     <div className={`form-container sign-in ${animatedClass}`}>
@@ -81,9 +78,10 @@ const Login = ({
             </a>
           </p>
         </div>
-        
-        
       </form>
+      <div>
+        <button onClick={adminClick} className="btn">Admin</button>
+      </div>
     </div>
   );
 };

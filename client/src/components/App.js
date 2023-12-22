@@ -213,7 +213,7 @@ const handleSearch = (searchQuery) => {
       },
       {
         path: "/edit",
-        element: <Edit userToEdit={userToEdit} handleDelete={handleDelete} updateCustomer={updateCustomer}/>
+        element: <Edit userToEdit={userToEdit} handleDelete={handleDelete} updateCustomer={updateCustomer} fetchResult={patchResult}/>
       }
     ]
 

@@ -22,7 +22,7 @@ api = Api(app)
 
 class AllCustomers(Resource):
     def get(self):
-        response_body = [customer.to_dict(only=('username', 'password', 'address', 'email', 'phone')) for customer in Customer.query.all()]
+        response_body = [customer.to_dict(only=('username', 'password', 'address', 'email', 'phone', 'id')) for customer in Customer.query.all()]
         return make_response(response_body, 200)
     
     def post(self):

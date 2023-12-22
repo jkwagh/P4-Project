@@ -66,7 +66,7 @@ const Edit = ({ userToEdit, handleDelete, updateCustomer, fetchResult }) => {
     return (
       <div>
         <NavBar />
-        Edit
+        <h1>Edit User Information</h1>
         <button onClick={onDeleteClick} value={userToEdit.id}>
           Delete User
         </button>

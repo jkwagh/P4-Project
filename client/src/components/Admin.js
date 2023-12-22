@@ -9,15 +9,20 @@ const Admin = ({ handleSearch, searchResult, editId }) => {
 
     const onClick = () => {
         handleSearch(searchQuery)
+        console.log(searchQuery)
     }
 
     const handleEditClick = (customerId) => {
+        console.log(customerId)
         editId(customerId)
         navigate('/edit')
       };
 
     return (
         <div>
+            <h1>Admin View</h1>
+            <h3>Search for a Customer to Edit</h3>
+            <label>Enter Customer Name:
             <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
             <button onClick={onClick}>Search</button>
             <ul>
@@ -27,6 +32,7 @@ const Admin = ({ handleSearch, searchResult, editId }) => {
                 </li>
                 ))}
             </ul>
+            </label>
         </div>
     )
 }
