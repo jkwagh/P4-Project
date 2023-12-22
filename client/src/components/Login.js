@@ -1,64 +1,91 @@
-import React, { useEffect, useState } from "react"
-import NavBar from "./NavBar";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Signup.css";
+import Admin from "./Admin";
+import './Login.css';
 
-const Login = ({ handleLogin, fetchResult, loginFormData, setLoginFormData }) => {
-    
-    console.log(loginFormData)
-    
-    const navigate = useNavigate()
-    useEffect(() => {
-        if (fetchResult === true) {
-                    navigate('/order')
-            }
-    }, [fetchResult])
-    
-    const [animatedClass, setAnimatedClass] = useState('');
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setLoginFormData({ ...loginFormData, [name]: value})
-        setAnimatedClass('animated-signup')
+const Login = ({
+  handleLogin,
+  fetchResult,
+  loginFormData,
+  setLoginFormData,
+}) => {
+  console.log(loginFormData);
+
+  const [animatedClass, setAnimatedClass] = useState('animated-signin');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (fetchResult === true) {
+      navigate("/order");
     }
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        handleLogin(loginFormData)
-    }
-    return( <div className="mainContainer">
-        <NavBar />
-        <div className="titleContainer">
-            <div>Login</div>
-        </div>
-        <br />
-        <form onSubmit={handleSubmit}>
-            <div className="inputContainer">
-                <input
-                    type="text"
-                    name="username"
-                    value={loginFormData.username}
-                    className="inputBox"
-                    placeholder="Enter username here"
-                    onChange={handleInputChange}
-                />
-            </div>
-            <br />
-            <div className="inputContainer">
-                <input
-                    type="text"
-                    name="password"
-                    value={loginFormData.password}
-                    className="inputBox"
-                    placeholder="Enter password here"
-                    onChange={handleInputChange}
-                />
-            </div>
-            <br />
-            <div className="buttonContainer">
-                <button type="submit" className="inputButton">Login</button>
-            </div>
-        </form>
-        </div>
-    )
+  }, [fetchResult]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setLoginFormData({ ...loginFormData, [name]: value });
+    setAnimatedClass('animated-signin');
   };
-export default Login
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleLogin(loginFormData);
+  };
+
+  const handleOnClick = (e) => {
+    e.preventDefault();
+    navigate('/signup')
+  }
+  
+
+
+  return (
+    <div className={`form-container sign-in ${animatedClass}`}>
+      <form onSubmit={handleSubmit}>
+        <h2 id ="title">login</h2>
+        <div className="form-group">
+          <input
+            type="text"
+            name="username"
+            value={loginFormData.username}
+            onChange={handleInputChange}
+            required
+          />
+          <i className="fas fa-user"></i>
+          <label htmlFor="username">username</label>
+        </div>
+
+        <div className="form-group">
+          <input
+            type="password"
+            name="password"
+            value={loginFormData.password}
+            onChange={handleInputChange}
+            required
+          />
+          <i className="fas fa-lock"></i>
+          <label htmlFor="password">password</label>
+        </div>
+        <div className="forgot-pass">
+          <a href="">forgot password?</a>
+        </div>
+        <button type="submit" className="btn">
+          login
+        </button>
+        <div className="link">
+          <p>
+            Don't have an account?
+            <a href="./Signup.js" className="signup-link" onClick={handleOnClick}>
+              {' '}
+              sign up
+            </a>
+          </p>
+        </div>
+        
+        
+      </form>
+    </div>
+  );
+};
+
+export default Login;

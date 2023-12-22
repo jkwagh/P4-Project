@@ -22,7 +22,7 @@ const NavBar = (props) => {
     <div>
       <nav className="nav">
         <h1 className="logo">FlatIron Eats</h1>
-        
+
         <NavLink to="/">Home</NavLink>
         <NavLink to="/about" className={About}>
           About

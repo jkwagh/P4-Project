@@ -30,7 +30,7 @@
     font-size: 3rem;
     text-align: center;
     text-transform: capitalize;
-    color: var(--titleColor);
+    color: #555555;
     }
     
     .wrapper .form-container form .form-group {
@@ -95,12 +95,12 @@
     }
     
     .wrapper .form-container form .forgot-pass a:hover {
-    color: var(--mainColor);
+    color: #89216b;
     }
     
     .wrapper .form-container form .btn {
     background: linear-gradient(to right, #da4453, #89216b);
-    color: var(--whiteColor);
+    color: #ffffff;
     text-transform: capitalize;
     width: 100%;
     height: 4rem;

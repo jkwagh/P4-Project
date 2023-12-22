@@ -1,7 +1,6 @@
 // Import React and useState from React
 import React, { useState } from 'react';
 import "./Signup.css"
-import NavBar from './NavBar';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -31,6 +30,12 @@ const SignUp = ({ addCustomer }) => {
     navigate('/login')
 };
 
+const handleOnClick = (e) => {
+  e.preventDefault();
+  navigate('/login')
+  
+}
+
 
   return (
     <div className="wrapper">
@@ -48,7 +53,7 @@ const SignUp = ({ addCustomer }) => {
 <div className="form-group">
           <input type="address" name="address" value={formData.address} onChange={handleInputChange} required />
           <i className="fas fa-lock"></i>
-          <label htmlFor="">Enter your Address</label>
+          <label htmlFor="address">Enter your Address</label>
         </div>
 
         <div className="form-group">
@@ -75,7 +80,7 @@ const SignUp = ({ addCustomer }) => {
         <div className="link">
           <p>
             You already have an account?
-            <a href="#" className="signin-link" onClick={handleInputChange}>
+            <a href='./Login.js' className="signin-link" onClick={handleOnClick}>
               {' '}
               sign in
             </a>
@@ -83,7 +88,9 @@ const SignUp = ({ addCustomer }) => {
         </div>
       </form>
     </div>
-
+<div>
+  
+</div>
     </div>
     
   );
