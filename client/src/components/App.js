@@ -77,7 +77,7 @@ function App() {
       setOrders([...orders, data])
     }).then(console.log(orders))
   }else{
-    alert("Error: Could not")
+    alert("Error: Could not save cart")
   }
   })
   }

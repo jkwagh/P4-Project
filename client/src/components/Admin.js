@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import NavBar from "./NavBar"
 
 const Admin = ({ handleSearch, searchResult, editId }) => {
     
@@ -19,6 +20,7 @@ const Admin = ({ handleSearch, searchResult, editId }) => {
 
     return (
         <div>
+            <NavBar />
             <h1>Admin View</h1>
             <h3>Search for a Customer to Edit</h3>
             <label>Enter Customer Name:
