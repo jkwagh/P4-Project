@@ -22,7 +22,7 @@ api = Api(app)
 
 class AllCustomers(Resource):
     def get(self):
-        response_body = [customer.to_dict(rules=('-password',)) for customer in Customer.query.all()]
+        response_body = [customer.to_dict(only=('username', 'password', 'address', 'email', 'phone')) for customer in Customer.query.all()]
         return make_response(response_body, 200)
     
     def post(self):
@@ -91,12 +91,38 @@ class AllRestaurants(Resource):
         response_body = [restaurants.to_dict() for restaurants in Restaurant.query.all()]
         return make_response(response_body, 200)
     
+    def post(self):
+        try:
+            new_restaurant = Restaurant(name=request.json.get('name'))
+            db.session.add(new_restaurant)
+            db.session.commit()
+            response_body = [new_restaurant.to_dict(only=('name',))]
+            return make_response(response_body, 201)
+        except:
+            response_body = {
+                "error" : "Restaurant could not be created"
+            }
+            return make_response(response_body, 400)
+    
 api.add_resource(AllRestaurants, '/restaurants')
 
 class AllFoods(Resource):
     def get(self):
         response_body = [food.to_dict(only =('id','name','type','img','restaurant_name','price')) for food in Food.query.all()]
         return make_response(response_body, 200)
+    
+    def post(self):
+        try:
+            new_food = Food(name=request.json.get('name'), type=request.json.get('type'), img=request.json.get('img'), price=request.json.get('price'), restaurant_name=request.get('restuarant_name'))
+            db.session.add(new_food)
+            db.session.commit()
+            response_body = [new_food.to_dict(only=('name',))]
+            return make_response(response_body, 201)
+        except:
+            response_body = {
+                "error" : "Restaurant could not be created"
+            }
+            return make_response(response_body, 400)
     
 api.add_resource(AllFoods, '/foods')
 
@@ -127,7 +153,7 @@ class Login(Resource):
         
         if customer:
             session['customer_id'] = customer.id
-            response_body = customer.to_dict(rules=('-password',))
+            response_body = customer.to_dict(only=('username', 'password', 'address', 'email', 'phone', 'id'))
             return make_response(response_body, 201)
         else:
             response_body = {
@@ -141,7 +167,7 @@ class CheckSession(Resource):
     def get(self):
         customer = Customer.query.filter(Customer.id == session.get('customer_id')).first()
         if customer:
-            response_body = customer.to_dict(rules=('-passwords',))
+            response_body = customer.to_dict(only=('username', 'password', 'address', 'email', 'phone'))
             return make_response(response_body, 200)
         else:
             return {'message': '401: Not Authorized'}, 401
@@ -150,7 +176,7 @@ api.add_resource(CheckSession, '/check_session')
 
 class AllOrders(Resource):
     def get(self):
-        response_body = [order.to_dict() for order in Order.query.all()]
+        response_body = [order.to_dict(only=('customer_id', 'food_id', 'quantity')) for order in Order.query.all()]
         return make_response(response_body, 200)
     
     def post(self):
