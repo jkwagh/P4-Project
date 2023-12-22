@@ -46,10 +46,10 @@ const Login = ({ handleLogin, fetchResult, loginFormData, setLoginFormData}) => 
             name="username"
             value={loginFormData.username}
             onChange={handleInputChange}
+            placeholder="username"
             required
           />
           <i className="fas fa-user"></i>
-          <label htmlFor="username">username</label>
         </div>
 
         <div className="form-group">
@@ -58,10 +58,10 @@ const Login = ({ handleLogin, fetchResult, loginFormData, setLoginFormData}) => 
             name="password"
             value={loginFormData.password}
             onChange={handleInputChange}
+            placeholder="password"
             required
           />
           <i className="fas fa-lock"></i>
-          <label htmlFor="password">password</label>
         </div>
         <div className="forgot-pass">
           <a href="">forgot password?</a>

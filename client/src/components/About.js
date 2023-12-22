@@ -1,9 +1,13 @@
 import React from 'react';
 import './About.css'; // Import your external CSS file
+import NavBar from './NavBar';
 
 const About = () => {
   return (
-    <div className="about-container">
+    <div>
+      <NavBar />
+      <div className="about-container">
+      
       <h1 className="main-heading">About Flatiron Eats</h1>
 
       <p className="sub-heading">Welcome to Flatiron Eats – Where Flavor Meets Convenience!</p>
@@ -37,6 +41,7 @@ const About = () => {
 
       <p className="signature">Sincerely, <br />The Flatiron Eats Team</p>
     </div>
+      </div>
   );
 };
 

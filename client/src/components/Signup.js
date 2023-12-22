@@ -49,39 +49,33 @@ const handleOnClick = (e) => {
         <h2>Sign up</h2>
 
         <div className="form-group">
-          <input type="text" name="username" value={formData.username} onChange={handleInputChange} required />
+          <input type="text" name="username" value={formData.username} onChange={handleInputChange} placeholder='Enter your username' required />
           <i className="fas fa-user"></i>
-          <label htmlFor="username">Create a username</label>
         </div>
 
         <div className="form-group">
-          <input type="address" name="address" value={formData.address} onChange={handleInputChange} required />
+          <input type="address" name="address" value={formData.address} onChange={handleInputChange} placeholder='Enter your address'required />
           <i className="fas fa-lock"></i>
-          <label htmlFor="address">Enter your Address</label>
         </div>
 
         <div className="form-group">
-          <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
+          <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder='Enter your email' required />
           <i className="fas fa-at"></i>
-          <label htmlFor="email">Enter you email</label>
         </div>
 
         <div className="form-group">
-          <input type="phone" name="phone" value={formData.phone} onChange={handleInputChange} required />
+          <input type="phone" name="phone" value={formData.phone} onChange={handleInputChange} placeholder='Enter your phone'required />
           <i className="fas fa-at"></i>
-          <label htmlFor="phone">Enter you Phone Number</label>
         </div>
 
         <div className="form-group">
-          <input type="password" name="password" value={formData.password} onChange={handleInputChange} required />
+          <input type="password" name="password" value={formData.password} onChange={handleInputChange} placeholder='Create a password'required />
           <i className="fas fa-lock"></i>
-          <label htmlFor="password">Create a password</label>
         </div>
 
         <div className="form-group">
-          <input type="password" required />
+          <input type="password" placeholder='Confirm password'required />
           <i className="fas fa-lock"></i>
-          <label htmlFor="">confirm password</label>
         </div>
 
         <button type="submit" className="btn">

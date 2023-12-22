@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import NavBar from "./NavBar"
+import "./Edit.css"
 
 const Admin = ({ handleSearch, searchResult, editId }) => {
     
@@ -26,10 +27,10 @@ const Admin = ({ handleSearch, searchResult, editId }) => {
             <label>Enter Customer Name:
             <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
             <button onClick={onClick}>Search</button>
-            <ul>
+            <ul className="list">
                 {searchResult.map((customer) => (
                 <li key={customer.id}>
-                    {customer.username}<button onClick={() => handleEditClick(customer.id)}>Edit</button>
+                    {customer.username}<button className="but" onClick={() => handleEditClick(customer.id)}>Edit</button>
                 </li>
                 ))}
             </ul>

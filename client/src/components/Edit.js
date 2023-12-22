@@ -71,7 +71,7 @@ const Edit = ({ userToEdit, handleDelete, updateCustomer, fetchResult }) => {
       <div>
         <NavBar />
         <h1>Edit User Information</h1>
-        <button onClick={onDeleteClick} value={userToEdit.id}>
+        <button className="btton" onClick={onDeleteClick} value={userToEdit.id}>
           Delete User
         </button>
         <form className="edit-form" onSubmit={handleSubmit}>
@@ -95,7 +95,7 @@ const Edit = ({ userToEdit, handleDelete, updateCustomer, fetchResult }) => {
             <input type="text" name="phone" placeholder={userToEdit.phone} defaultValue={editForm.phone} onChange={onChange}/>
             </label>
             <br />
-          <button type="submit">Submit</button>
+          <button className= "btton"type="submit">Submit</button>
         </form>
       </div>
     );
