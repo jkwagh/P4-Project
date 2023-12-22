@@ -164,13 +164,13 @@ const handleSearch = (searchQuery) => {
         element: <>
         <Order />
         <OrderHeader />
-        <OrderFood cartItems={cartItems} setCartItems={setCartItems}/>
+        <OrderFood user={user} cartItems={cartItems} setCartItems={setCartItems}/>
         </>, 
       },
       {
         path: "/checkout",
         element: <>
-        <Checkout user={user} cartItems={cartItems} setCartItems= {setCartItems} />
+        <Checkout cart={cart} user={user} cartItems={cartItems} setCartItems= {setCartItems} />
     
         </>
       },

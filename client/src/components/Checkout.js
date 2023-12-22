@@ -3,9 +3,9 @@ import NavBar from './NavBar';
 import "./Checkout.css";
 
 const Checkout = ({ user, cartItems, setCartItems }) => {
-  const totalPrice = cartItems.reduce((total, food) => total + food.price, 0);
+  
   const [orders, setOrders] = useState([])
-  const [cart, setCart] = useState({
+  const [newCart, setNewCart] = useState({
     customer_id: 0,
     food_id: 0,
     quantity: 0,
@@ -61,8 +61,12 @@ const Checkout = ({ user, cartItems, setCartItems }) => {
 
   const placeOrder = () => {
     console.log(user.id)
-    setCart({...cart, customer_id: user.id})
-    console.log(cart)
+    const food = cartItems[0]
+    setNewCart({...newCart, customer_id: user.id})
+    setNewCart({...newCart, food_id: food.id})
+    setNewCart({...newCart, quantity: cartItems.map((food) => food.quantity)})
+    newOrder(newCart)
+    console.log(newCart)
   }
 
   return (
