@@ -7,11 +7,9 @@
     border-radius: 20px;
     margin: 1%;
     cursor: pointer;
-    color:rgb(249, 243, 243);
+    color:rgb(228, 10, 10);
     max-width: calc(100vw -2rem);
-    grid-template-columns: 1fr 1fr 1fr;
     justify-content: center;
-
  }
   
  .bttn {
@@ -21,17 +19,14 @@
  }
   
  .food-container {
-    color: silver;
-    background: white;
     display: grid;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     flex-wrap:wrap;
-    background-color: black;
-    grid-template-columns: auto auto auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     margin: 5px 10px;
-    grid-gap: 10%;
+    /* grid-gap: 10%; */
     
    
  }

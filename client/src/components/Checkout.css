@@ -1,4 +1,4 @@
-.cart-list {
+/* .cart-list {
     height: 80%;
     width: 90%;
     overflow-y: scroll;
@@ -26,4 +26,93 @@
  .food-cart{
     grid-template-rows: 1fr 1fr;
     display: grid
- }
+ } */
+
+ body {
+   font-family: 'Arial', sans-serif;
+   background-color: #f4f4f4;
+   margin: 0;
+   padding: 0;
+}
+
+h1 {
+   text-align: center;
+}
+
+.cart-cont {
+   display: flex;
+   justify-content: space-between;
+   max-width: 1200px;
+   margin: 20px auto;
+   background-color: #fff;
+   border-radius: 8px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cart-list {
+   flex-grow: 1;
+   padding: 20px;
+}
+
+.food-cart {
+   background-color: rgba(255, 255, 255, 0.9);
+   margin-bottom: 20px;
+   padding: 15px;
+   border-radius: 8px;
+   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+   position: relative;
+}
+
+.food-cart h3 {
+   margin: 0;
+}
+
+.food-cart p {
+   margin: 8px 0;
+   font-weight: bold;
+}
+
+.food-cart button {
+   background-color: #e74c3c;
+   color: #fff;
+   padding: 8px;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 14px;
+}
+
+.food-cart button:hover {
+   background-color: #c0392b;
+}
+
+.total {
+   flex-basis: 30%;
+   padding: 20px;
+   background-color: #3498db;
+   color: #fff;
+   border-top-right-radius: 8px;
+   border-bottom-right-radius: 8px;
+   text-align: center;
+}
+
+.total p {
+   font-size: 18px;
+   margin: 10px 0;
+}
+
+.Checkout-btn {
+   background-color: #2ecc71;
+   color: #fff;
+   padding: 15px;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 16px;
+}
+
+.Checkout-btn:hover {
+   background-color: #27ae60;
+}
+
+/* Add more styles as needed */
