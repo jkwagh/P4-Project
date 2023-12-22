@@ -29,14 +29,8 @@ function App() {
     password: "",
     username: ""
     });
-  const [orders, setOrders] = useState([]);
 
-  const [newOrders, setNewOrders] = useState({
-    customer_id: "",
-    food_id: "",
-    quantity: 0 ,
-  });
-
+  
   useEffect(() => {
     fetch('/customers')
     .then((resp) => resp.json())
@@ -45,15 +39,7 @@ function App() {
     })
   }, [])
 
-  useEffect(() => {
-    fetch('/orders')
-    .then((resp) => resp.json())
-    .then((data) => {
-      setOrders(data)
-    })
-  }, [])
-
-//Keep user logged in
+// Keep user logged in
   useEffect(() => {
     fetch("/check_session")
     .then((resp) => {
@@ -99,19 +85,7 @@ const addCustomer = (formData) => {
   .then((data) => setCustomers([...customers, data]))
   }
   
-  const newOrder = (cartItems) => {
-  fetch('/orders', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(cartItems)
-  })
-  .then((resp) => resp.json())
-  .then((data) => {
-    setOrders([...orders, data])
-  })
-}
+  
 
 const editId = (customerId) => {
   console.log(customerId)
@@ -196,7 +170,7 @@ const handleSearch = (searchQuery) => {
       {
         path: "/checkout",
         element: <>
-        <Checkout cartItems={cartItems} setCartItems= {setCartItems} newOrder={newOrder} newOrders={newOrders} setNewOrders={setNewOrders}/>
+        <Checkout user={user} cartItems={cartItems} setCartItems= {setCartItems} />
     
         </>
       },

@@ -155,7 +155,7 @@ class AllOrders(Resource):
     
     def post(self):
         try:
-            new_order = Order(customer_id=request.json['customer_id'], food_id=request.json['food_id'], total_price=request.json['total_price'])
+            new_order = Order(customer_id=request.json['customer_id'], food_id=request.json['food_id'], quantity=request.json['quantity'])
             db.session.add(new_order)
             db.session.commit()
             return make_response(new_order.to_dict(), 201)

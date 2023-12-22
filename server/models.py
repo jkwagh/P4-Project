@@ -5,6 +5,12 @@ from sqlalchemy.orm import validates
 
 from config import db
 
+#Association Table
+# food_orders = db.Table(
+#     'foods_orders',
+#     db.Column('food_id', db.Integer, db.ForeignKey('food.id'), primary_key=True),
+#     db.Column('order_id', db.Integer, db.ForeignKey('orders.id'), primary_key=True)
+# )
 
 # Models go here!
 class Customer(db.Model, SerializerMixin):
@@ -60,13 +66,13 @@ class Order(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'))
     food_id = db.Column(db.Integer, db.ForeignKey('food.id'))
-    total_price = db.Column(db.Integer)
+    quantity = db.Column(db.Integer)
     
     customer = db.relationship('Customer', back_populates='orders')
     food = db.relationship('Food', back_populates='orders')
 
     def __repr__(self):
-        return f"<Order {self.id}: {self.customer_id}:{self.food_id}:{self.total_price}>"
+        return f"<Order {self.id}: {self.customer_id}:{self.food_id}:{self.quantity}>"
 
 # class RestaurantFood(db.Model, SerializerMixin):
 #     __tablename__ = 'restaurant_food'

@@ -2,10 +2,38 @@ import React, { useState, useEffect } from 'react';
 import NavBar from './NavBar';
 import "./Checkout.css";
 
-const Checkout = ({cartItems, setCartItems, newOrder, newOrders, setNewOrders}) => {
-  
+const Checkout = ({ user, cartItems, setCartItems }) => {
   const totalPrice = cartItems.reduce((total, food) => total + food.price, 0);
+  const [orders, setOrders] = useState([])
+  const [cart, setCart] = useState({
+    customer_id: 0,
+    food_id: 0,
+    quantity: 0,
+  });
 
+  useEffect(() => {
+    fetch('/orders')
+    .then((resp) => resp.json())
+    .then((data) => {
+      setOrders(data)
+    })
+  }, [])
+
+  const newOrder = (orderCart) => {
+    console.log(orderCart)
+    fetch('/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orderCart)
+    })
+    .then((resp) => resp.json())
+    .then((data) => {
+      setOrders([...orders, data])
+    })
+  }
+ 
   useEffect(() => {
     // Save cart to localStorage whenever it changes
     localStorage.setItem('cart', JSON.stringify(cartItems));
@@ -31,6 +59,12 @@ const Checkout = ({cartItems, setCartItems, newOrder, newOrders, setNewOrders}) 
     alert('Cart cleared!');
   }
 
+  const placeOrder = () => {
+    console.log(user.id)
+    setCart({...cart, customer_id: user.id})
+    console.log(cart)
+  }
+
   return (
     <div>
       <NavBar />
@@ -54,11 +88,7 @@ const Checkout = ({cartItems, setCartItems, newOrder, newOrders, setNewOrders}) 
           <h1>Total</h1>
           <p>{cartItems.reduce((a, b) => a + b.price, 0)}$</p>
           <button className="Checkout-btn"
-          onClick={() => { console.log(cartItems)
-            clearCart();
-            setNewOrders(cartItems);
-            alert(`Your Order is being processed and will arrive shortly`)
-          }}
+          onClick={placeOrder}
           >Order Now</button>
         </div>
       </div>
