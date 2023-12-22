@@ -24,7 +24,7 @@ const NavBar = (props) => {
         <h1 className="logo">FlatIron Eats</h1>
 
         <NavLink to="/">Home</NavLink>
-        <NavLink to="/about" className={About}>
+        <NavLink to="/about" className="About">
           About
         </NavLink>
         {/* <NavLink to="/Order">Order</NavLink>

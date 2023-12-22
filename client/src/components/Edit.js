@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
+import "./Edit.css";
 
 const Edit = ({ userToEdit, handleDelete, updateCustomer, fetchResult }) => {
     const navigate = useNavigate();
@@ -73,7 +74,7 @@ const Edit = ({ userToEdit, handleDelete, updateCustomer, fetchResult }) => {
         <button onClick={onDeleteClick} value={userToEdit.id}>
           Delete User
         </button>
-        <form onSubmit={handleSubmit}>
+        <form className="edit-form" onSubmit={handleSubmit}>
             <label>Username
                 <input type="text" name="username" placeholder={userToEdit.username} defaultValue={editForm.username} onChange={onChange}/>
             </label>

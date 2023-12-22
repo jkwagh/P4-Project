@@ -37,7 +37,7 @@ const OrderFood = ({cartItems, setCartItems}) => {
                 <h3>{foods.name}</h3>
                 <p>{foods.price}</p>
                 <p>{foods.restaurant_name}</p>
-                <button className="btn"
+                <button className="bttn"
                 onClick={() => {
                     alert(`${foods.name} added to cart!`);
                 setCartItems([...cartItems, foods]);
