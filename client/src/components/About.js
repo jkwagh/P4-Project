@@ -5,7 +5,9 @@ import NavBar from './NavBar';
 const About = () => {
   return (
     <div>
-      <NavBar />
+      <div className='navBarA'>
+        <NavBar />
+        </div>
       <div className="about-container">
       
       <h1 className="main-heading">About Flatiron Eats</h1>

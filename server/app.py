@@ -120,7 +120,7 @@ class AllFoods(Resource):
             return make_response(response_body, 201)
         except:
             response_body = {
-                "error" : "Restaurant could not be created"
+                "error" : "Food could not be created"
             }
             return make_response(response_body, 400)
     

@@ -38,7 +38,9 @@ const Checkout = ({ user, cartItems, setCartItems, newCart, setNewCart, newOrder
 
   return (
     <div>
-      <NavBar />
+      <div className="navBar" >
+        <NavBar />
+        </div>
       <h1>Checkout</h1>
 
       <div className="cart-cont">
@@ -60,7 +62,9 @@ const Checkout = ({ user, cartItems, setCartItems, newCart, setNewCart, newOrder
           <p>{cartItems.reduce((a, b) => a + b.price, 0)}$</p>
           <button className="Checkout-btn"
           onClick={placeOrder}
-          >Order Now</button>
+          >
+          Order Now
+          </button>
         </div>
       </div>
     </div>

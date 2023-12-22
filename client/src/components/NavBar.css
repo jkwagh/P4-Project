@@ -10,6 +10,19 @@
     
     
 }
+.navBarA{
+    background-color: #008080;
+    border: none;
+    height: 100px;
+    align-items: center;
+    padding: 0 20px;
+    position:static;
+    top: 0;
+    z-index: 1;
+    text-decoration: none;
+    font-size: 25px;
+    font-style: oblique;
+}
 
 .navBar a{
     text-decoration: none;
