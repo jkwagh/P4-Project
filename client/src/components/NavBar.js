@@ -3,7 +3,6 @@ import "./NavBar.css";
 import Login from "./Login";
 import Signup from "./Signup";
 import About from "./About";
-import Restaurants from "./Restaurant";
 
 const NavBar = (props) => {
   const { loggedIn, email } = props;
@@ -28,7 +27,6 @@ const NavBar = (props) => {
         <NavLink to="/about" className={About}>
           About
         </NavLink>
-        <NavLink to="/restaurants">Restaurants</NavLink>
         {/* <NavLink to="/Order">Order</NavLink>
         <NavLink to="/checkout">Checkout</NavLink> */}
         <NavLink to="/Login" className="Login">

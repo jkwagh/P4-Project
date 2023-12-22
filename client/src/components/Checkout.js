@@ -2,38 +2,8 @@ import React, { useState, useEffect } from 'react';
 import NavBar from './NavBar';
 import "./Checkout.css";
 
-const Checkout = ({ user, cartItems, setCartItems }) => {
+const Checkout = ({ user, cartItems, setCartItems, newCart, setNewCart, newOrder }) => {
   
-  const [orders, setOrders] = useState([])
-  const [newCart, setNewCart] = useState({
-    customer_id: 0,
-    food_id: 0,
-    quantity: 0,
-  });
-
-  useEffect(() => {
-    fetch('/orders')
-    .then((resp) => resp.json())
-    .then((data) => {
-      setOrders(data)
-    })
-  }, [])
-
-  const newOrder = (orderCart) => {
-    console.log(orderCart)
-    fetch('/orders', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(orderCart)
-    })
-    .then((resp) => resp.json())
-    .then((data) => {
-      setOrders([...orders, data])
-    })
-  }
- 
   useEffect(() => {
     // Save cart to localStorage whenever it changes
     localStorage.setItem('cart', JSON.stringify(cartItems));
@@ -60,13 +30,10 @@ const Checkout = ({ user, cartItems, setCartItems }) => {
   }
 
   const placeOrder = () => {
-    console.log(user.id)
-    const food = cartItems[0]
-    setNewCart({...newCart, customer_id: user.id})
-    setNewCart({...newCart, food_id: food.id})
-    setNewCart({...newCart, quantity: cartItems.map((food) => food.quantity)})
-    newOrder(newCart)
-    console.log(newCart)
+    const food = cartItems[0];
+    const foodQuantity = cartItems.length;
+    setNewCart(prevCart => ({...prevCart, customer_id: user.id, food_id: food.id, quantity: foodQuantity}));
+    newOrder(newCart);
   }
 
   return (

@@ -10,7 +10,6 @@ import OrderFood from "./OrderFood";
 import OrderHeader from "./OrderHeader"
 import About from "./About";
 import Edit from "./Edit";
-import Restaurants from "./Restaurant";
 
 function App() {
   const [customers, setCustomers] = useState([]);
@@ -25,9 +24,15 @@ function App() {
   const [fetchResult, setFetchResult] = useState(false);
   const [postResult, setPostResult] = useState(false);
   const [patchResult, setPatchResult] = useState(false);
+  const [orders, setOrders] = useState([])
   const [loginFormData, setLoginFormData] = useState({
     password: "",
     username: ""
+    });
+  const [newCart, setNewCart] = useState({
+      customer_id: 0,
+      food_id: 0,
+      quantity: 0,
     });
 
   
@@ -48,6 +53,35 @@ function App() {
       }
     })
   }, []);
+
+  useEffect(() => {
+    fetch('/orders')
+    .then((resp) => resp.json())
+    .then((data) => {
+      setOrders(data)
+    })
+  }, [])
+
+  const newOrder = (newCart) => {
+    fetch('/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newCart)
+    })
+    .then((resp) => {
+      if(resp.ok){
+        resp.json()
+    .then((data) => {
+      setOrders([...orders, data])
+    }).then(console.log(orders))
+  }else{
+    alert("Error: Could not")
+  }
+  })
+  }
+  
 
 //Login for existing user
   const handleLogin = (loginFormData) => {
@@ -170,8 +204,7 @@ const handleSearch = (searchQuery) => {
       {
         path: "/checkout",
         element: <>
-        <Checkout cart={cart} user={user} cartItems={cartItems} setCartItems= {setCartItems} />
-    
+        <Checkout cart={cart} user={user} cartItems={cartItems} setCartItems= {setCartItems} newCart={newCart} setNewCart={setNewCart} newOrder={newOrder}/>
         </>
       },
       {
