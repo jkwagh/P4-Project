@@ -10,7 +10,7 @@ Welcome to Flatiron Eats, your go-to food delivery app! Flatiron Eats is a moder
 
 ## Project Structure
 
-- **`clien/src/`:** Contains React components, styles, and other project-specific files.
+- **`client/src/`:** Contains React components, styles, and other project-specific files.
 - **`public/`:** Holds static assets and the HTML template.
 - **`db.json`:** Simulated backend data for restaurants, menus, and user information.
 
